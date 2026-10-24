@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il giardino delle cento dalie — Una caramella alla menta</title>
+<meta name="description" content="Un racconto da leggere con calma. Dalla sezione «Metti in pausa il mondo» di Una caramella alla menta.">
+<link rel="icon" href="logo.png">
+<style>
+@font-face{font-family:'Caladea';src:url('font/Caladea-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+/* Il corsivo dei titoli: Instrument Serif, di Rodrigo Fuenzalida e Jordan
+   Egstad, licenza SIL Open Font (font/LICENZE.txt), servito dal sito come
+   gli altri.
+   Scelto misurando i rapporti fra le altezze delle lettere sulla copertina
+   a stampa a 300 dpi. Quei rapporti sono l'impronta di un carattere: non
+   cambiano col corpo ne' con la spaziatura.
+
+                       minuscole/maiuscole   aste/maiuscole
+     copertina                0,692               1,005
+     Instrument Serif         0,710               1,021
+     Cormorant Garamond       0,626               1,139
+
+   Su 92 combinazioni di carattere e peso, Instrument Serif sbaglia 0,055;
+   il secondo arrivato 0,097.
+
+   Qui prima c'era Cormorant Garamond, scelto confrontando larghezza e
+   spessore della parola «Caramella». Era una misura falsata: normalizzavo
+   sull'altezza del riquadro, che dipende dalle aste, e Cormorant ha le aste
+   molto piu' alte delle maiuscole. Cosi' premiavo proprio il carattere piu'
+   lontano. Il rapporto fra le altezze non si puo' falsare allo stesso modo. */
+@font-face{font-family:'Instrument Serif';src:url('font/InstrumentSerif-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --panna:#F7F3EA; --panna-alt:#EDE6D8; --salvia:#7E8E6F; --menta:#C4DCC8;
+  --oliva:#3E5222; --inchiostro:#23201A; --grigio:#6E6859; --bordo:#D8CEB9;
+  --font-testo:'Caladea',Georgia,'Times New Roman',serif;
+  --font-etichetta:'Carlito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-titolo:'Instrument Serif','Caladea',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--panna);color:var(--inchiostro);font-family:var(--font-testo);font-size:1.19rem}
+a{color:var(--oliva)}
+img{max-width:100%}
+
+/* Colonna stretta e righe alte: sono venti minuti di lettura, l'occhio deve
+   trovare l'inizio della riga successiva senza cercarlo. Circa 65 battute
+   per riga, che e' la misura che stanca meno: misurata, non stimata. */
+main{max-width:36rem;margin:0 auto;
+  padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:1rem}
+
+.torna{font-family:var(--font-etichetta);font-size:.92rem;padding-block:1.6rem 0;
+  display:block;color:var(--grigio);text-decoration:none}
+.torna:hover{color:var(--oliva)}
+
+.apertura{padding-block:2.2rem 0;display:flex;flex-direction:column;gap:.9rem;
+  border-bottom:1px solid var(--bordo);padding-bottom:2rem;margin-bottom:2.4rem}
+h1{font-family:var(--font-titolo);font-style:italic;font-size:clamp(2.2rem,6.8vw,2.95rem);line-height:1.05;letter-spacing:.005em;
+  font-weight:400;margin:0;text-wrap:balance;color:var(--oliva)}
+.durata{font-family:var(--font-etichetta);font-size:.92rem;line-height:1.5;color:var(--grigio)}
+
+.racconto{font-size:1.22rem;line-height:1.78}
+.racconto p{margin:0 0 1.35rem}
+.racconto p:last-child{margin-bottom:0}
+.racconto .battuta{margin-bottom:1.1rem}
+/* I messaggi scambiati alla fine: corsivi e un poco rientrati, come una
+   voce che arriva da un altro posto. */
+.racconto .messaggio{font-style:italic;color:var(--grigio);
+  margin:0 0 1.1rem;padding-left:1.2rem;border-left:2px solid var(--bordo)}
+
+.fregio{display:flex;align-items:center;gap:.55rem;margin:2.6rem auto 2.8rem;
+  color:var(--oliva);opacity:.75;max-width:14rem}
+.fregio span{flex:1;height:1px;background:currentColor;opacity:.55}
+.fregio i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+.fine{margin-top:3.2rem;padding-top:2rem;border-top:1px solid var(--bordo);
+  display:flex;flex-direction:column;gap:.9rem}
+.fine p{margin:0;font-size:1.06rem;line-height:1.6;color:var(--grigio)}
+.fine a{font-family:var(--font-etichetta);font-weight:700;font-size:1rem}
+
+footer{max-width:36rem;margin:2.6rem auto 0;
+  padding:1.6rem max(20px,env(safe-area-inset-left,0px)) 3.5rem}
+footer p{font-family:var(--font-etichetta);font-size:.86rem;line-height:1.55;
+  color:var(--grigio);margin:0}
+a:focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+
+/* ---------- schermi grandi ----------
+   La colonna del racconto NON si allarga: a 65 battute per riga si legge per
+   venti minuti senza stancarsi, e allargarla peggiorerebbe la lettura. Ma il
+   titolo e la durata salgono nel margine sinistro, cosi' la pagina usa la
+   larghezza invece di essere un nastro in mezzo al vuoto. Il titolo resta
+   accanto al testo mentre si scorre, come il segno in un libro. */
+@media (min-width:1100px){
+  main,footer{max-width:64rem}
+  main{
+    display:grid;
+    grid-template-columns:minmax(0,21.5rem) minmax(0,36rem);
+    column-gap:3.8rem;align-items:start;
+  }
+  /* Il blocco di sinistra deve essere UN elemento solo. Tenendo il link e il
+     titolo separati e facendo "span 2" sul racconto, la griglia gonfiava
+     tutte e due le righe a meta' dei quattordicimila pixel del testo e il
+     titolo finiva a meta' racconto. */
+  main > *{grid-column:2}
+  .lato{
+    grid-column:1;grid-row:1;
+    position:sticky;top:2.4rem;align-self:start;
+  }
+  .lato .torna{padding-block:2.6rem 0}
+  .apertura{border-bottom:none;padding-bottom:0;margin-bottom:0;padding-block:1.4rem 0}
+  .racconto{grid-column:2;grid-row:1;padding-top:2.6rem}
+  .fine{grid-column:2;grid-row:2}
+}
+
+.riga-privacy{font-family:var(--font-etichetta);font-size:.88rem;margin-top:.9rem}
+.riga-privacy a{color:var(--salvia)}
+
+/* ---------- schermo grande, rifatto ----------
+   Prima qui c'era una griglia a due colonne con il titolo appiccicato a
+   sinistra. Dava alla pagina una gamba sola: il testo spinto a destra e
+   mezza larghezza vuota per tutta la lettura. Adesso il racconto sta al
+   centro come in un libro e cresce di corpo, cosi' la pagina usa lo
+   schermo invece di starci dentro. */
+@media (min-width:1100px){
+  main{display:block;max-width:44rem}
+  footer{max-width:44rem}
+  main > *{grid-column:auto}
+  .lato{position:static;display:block}
+  .lato .torna{padding-block:2.8rem 0}
+  .apertura{border-bottom:1px solid var(--bordo);
+    padding-block:1.6rem 2.2rem;margin-bottom:2.8rem}
+  .apertura h1{font-size:3.05rem;line-height:1.06}
+  .racconto{grid-column:auto;grid-row:auto;padding-top:0;
+    font-size:1.38rem;line-height:1.8}
+  .racconto p{margin:0 0 1.5rem}
+  .fine{grid-column:auto;grid-row:auto;font-size:1.1rem}
+}
+
+/* ---- testata, trapiantata da «Metti in pausa il mondo» ---- */
+/* ---- testata ----
+   Il testo sta a sinistra, non al centro: la zona calma e chiara di questa
+   immagine e' li' (muretto e cielo). Misurato sull'immagine prima di decidere. */
+.testata{--oliva:#3E5222;--inchiostro:#23201A;--grigio:#6E6859} /* testata sempre su velo chiaro: colori del tema chiaro anche in tema scuro */
+.testata{position:relative;width:100%;overflow:hidden;height:clamp(430px,42vw,620px)}
+.testata img{display:block;width:100%;height:100%;object-fit:cover;object-position:34% 48%}
+.testata::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 46% 64% at 26% 46%,
+    rgba(247,243,234,.86) 0%, rgba(247,243,234,.76) 36%,
+    rgba(247,243,234,.40) 66%, rgba(247,243,234,0) 100%);
+}
+.sopra{position:absolute;inset:0;z-index:2;display:flex;align-items:center;
+  justify-content:flex-start;
+  padding-left:max(7%,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));}
+.blocco{max-width:27rem;display:flex;flex-direction:column;align-items:flex-start;
+  gap:1.05rem;text-align:left}
+.nome{font-family:var(--font-titolo);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.3vw,3.4rem);line-height:1.04;letter-spacing:.005em;color:var(--oliva);
+  margin:0;text-wrap:balance}
+.intro{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--inchiostro);margin:0}
+
+/* Larghezze intermedie: la zona calma dell'immagine e' solo il 40% sinistro,
+   quindi il blocco va stretto o le righe finiscono sull'ulivo. Misurato: a
+   820 px l'introduzione scendeva a 1,8 di contrasto sul bordo destro. */
+@media (min-width:701px) and (max-width:1100px){
+  .blocco{max-width:22rem}
+  .nome{font-size:clamp(2.05rem,3.8vw,2.65rem)}
+  .intro{font-size:1.02rem;line-height:1.6}
+}
+
+
+@media (max-width:700px){
+  /* height:auto e' indispensabile, se no l'altezza vince su aspect-ratio */
+  .testata{height:clamp(420px,112vw,520px)}
+  .testata img{object-position:26% 48%}
+  .testata::after{
+    background:linear-gradient(to bottom,rgba(247,243,234,.88) 0%,
+      rgba(247,243,234,.78) 46%,rgba(247,243,234,.30) 78%,rgba(247,243,234,0) 100%);
+  }
+  .sopra{align-items:flex-start;padding-top:8%;padding-left:max(18px,env(safe-area-inset-left,0px))}
+  .blocco{max-width:19.5rem;gap:.85rem}
+  .nome{font-size:2.25rem}
+  .intro{font-size:1.04rem;line-height:1.6}
+  /* Sul telefono i riquadri uno sotto l'altro diventano una colonna lunga:
+     stretti i margini interni e lo spazio fra loro, senza toccare il corpo
+     del testo, che deve restare leggibile. */
+  .ingressi{margin-top:2.2rem;gap:.8rem}
+  .ingresso{padding:1.15rem 1.2rem 1.25rem;gap:.42rem}
+  .ingresso h2{font-size:1.24rem}
+  .ingresso p{font-size:1.01rem;line-height:1.5}
+  .coda{margin-top:2.4rem}
+}
+
+/* Il link di ritorno: adesso che il titolo e' salito nella testata, questo
+   resta da solo in cima alla colonna e senza aria finisce appiccicato alla
+   prima riga del racconto. */
+main > .torna{display:block;padding-block:2rem 1.8rem}
+
+/* ---- un asse solo, e la misura della colonna ----
+   Due cose insieme, perche' sono lo stesso problema.
+
+   Il titolo nella testata cominciava al 7% della larghezza e il racconto al
+   30%: due allineamenti diversi sulla stessa pagina. L'occhio leggeva quel
+   salto come «testo spinto a destra» anche se la colonna era centrata
+   davvero (centro 846 su una pagina larga 1707). Adesso il bordo sinistro
+   del titolo esce dalla stessa formula della colonna, quindi restano
+   allineati a qualunque larghezza.
+
+   E la colonna si allarga. Non allungando la riga, pero': cresce anche il
+   carattere, cosi' le battute per riga restano settantadue — misurate
+   contando le righe di un paragrafo vero, non stimate. Allargare lasciando
+   il corpo com'era avrebbe portato la riga a novanta battute, e dopo venti
+   minuti di racconto l'occhio perde il capo riga.
+
+   Lo sfumato si sposta col titolo: la zona chiara delle illustrazioni
+   finisce fra il 30 e il 38% della larghezza, quindi senza spostarlo il
+   titolo finirebbe sui fiori. */
+@media (min-width:1100px){
+  main,footer{max-width:56rem}
+  .racconto{font-size:1.70rem}
+  .sopra{padding-left:max(7%, calc((100vw - 56rem) / 2))}
+  .testata::after{background:radial-gradient(ellipse 52% 70% at 42% 46%,
+    rgba(247,243,234,.90) 0%, rgba(247,243,234,.82) 38%,
+    rgba(247,243,234,.44) 68%, rgba(247,243,234,0) 100%);}
+}
+</style>
+</head>
+<body>
+<header class="testata">
+  <img src="testata-dalie.jpg" alt="">
+  <div class="sopra">
+    <div class="blocco">
+      <h1 class="nome">Il giardino delle cento dalie</h1>
+      <p class="intro">Un racconto di circa 19 minuti. Non devi finirlo oggi: se lo lasci a metà, resta qui.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="torna" href="metti-in-pausa-il-mondo.html">← Metti in pausa il mondo</a>
+<article class="racconto">
+  <p>Quando arrivò a San Martino delle Colline, Viola trovò la piazza occupata da un mercato di fiori. Era un sabato di settembre, il sole illuminava le facciate color ocra e sotto i portici erano stati sistemati secchi di zinco pieni di zinnie, astri e rami di eucalipto. Davanti alla fontana, una donna avvolgeva mazzi di fiori nella carta color avana, mentre un uomo disponeva piccoli vasi di terracotta su una scala di legno. L'aria profumava di terra umida, caffè appena macinato e focaccia al rosmarino.</p>
+  <p>Viola aveva prenotato tre notti in una pensione poco distante dalla piazza. Era arrivata in treno fino alla stazione della valle e aveva percorso l'ultimo tratto su un autobus che attraversava vigneti, campi di girasoli ormai maturi e lunghi filari di cipressi. Dal finestrino aveva visto le colline cambiare colore a ogni curva, dal verde argenteo degli ulivi al giallo caldo dei campi appena raccolti. Adesso, con la valigia accanto alla panchina della fontana, si concedeva qualche minuto per osservare il paese prima di cercare la pensione.</p>
+  <p>Era stata sul punto di rinunciare anche a quel viaggio. Per settimane aveva tenuto aperta sul computer la pagina della pensione, controllando le camere disponibili e rimandando la prenotazione. Non era la prima volta che le succedeva. Viola sapeva organizzare perfettamente le cose necessarie, ma davanti a quelle che desiderava davvero diventava esitante. Aveva un quaderno pieno di indirizzi di luoghi da visitare, ricette da provare e piccoli progetti per la casa. Ogni tanto aggiungeva qualcosa, raramente cancellava una voce perché l'aveva realizzata. Alla fine aveva prenotato la pensione quasi per sorpresa, durante una pausa pranzo, prima di concedersi il tempo di trovare un'altra ragione per aspettare.</p>
+  <p>Fu un mazzo di dalie a trattenerla davanti a una bancarella. Erano raccolte in un grande vaso azzurro e avevano colori che Viola non ricordava di aver mai visto tutti insieme: albicocca, crema, rosa antico, rosso vellutato e un viola così scuro da sembrare quasi nero. Alcune avevano petali sottili e appuntiti, altre erano tonde e compatte, simili a piccoli pompon.</p>
+  <p class="battuta">«Quelle color pesca sono le mie preferite» disse la donna dietro il banco, vedendola osservare i fiori.</p>
+  <p>Viola si avvicinò. «Non sapevo che esistessero dalie di così tante forme.»</p>
+  <p class="battuta">«E queste sono soltanto una parte. Se ti piacciono, domani dovresti andare a Villa Glicine.»</p>
+  <p>La donna le spiegò che, sulle colline appena fuori dal paese, esisteva un giardino privato famoso per le sue cento varietà di dalie. La proprietaria lo apriva ai visitatori una sola domenica all'anno, quando le fioriture raggiungevano il momento più bello. Non c'erano biglietti da prenotare: bastava presentarsi al cancello dopo le dieci, seguire il vialetto dei tigli e lasciarsi guidare dai sentieri.</p>
+  <p class="battuta">«Ci sarà anche una tavolata per il pranzo» aggiunse. «Ognuno porta qualcosa. Se non hai niente, non importa: ce n'è sempre per tutti.»</p>
+  <p>Viola acquistò tre dalie color pesca e si avviò verso la pensione. Mentre camminava pensò che avrebbe potuto visitare il giardino il giorno seguente. Poi si ricordò di aver già immaginato una passeggiata fino al belvedere, una visita alla bottega di ceramiche e un pranzo tranquillo sotto i portici. Era il suo modo abituale di reagire a una proposta inattesa: prima ancora di decidere se le piacesse, cercava un motivo per lasciarla da parte.</p>
+  <p>La pensione si trovava in una strada tranquilla, dietro la chiesa, in una casa con le persiane verdi e una grande vite che copriva parte della facciata. La proprietaria, Teresa, la accolse e le mostrò una camera affacciata sui tetti del paese. C'erano un letto di ferro battuto, una scrivania vicino alla finestra e una brocca di ceramica bianca nella quale Viola sistemò immediatamente i fiori.</p>
+  <p>Nel pomeriggio uscì per una passeggiata. San Martino era un paese piccolo, fatto di strade lastricate e case costruite lungo il pendio della collina. Una scalinata conduceva a un belvedere da cui si vedevano i vigneti, i campi e, in lontananza, una fila di montagne azzurrine. Viola si fermò vicino al parapetto, dove un vecchio glicine intrecciava i suoi rami sopra una panchina. Sotto di lei, fra gli orti, qualcuno stava raccogliendo pomodori in una cesta. Più lontano, un trattore avanzava lentamente lungo un filare, lasciando dietro di sé una sottile nuvola di polvere dorata.</p>
+  <p>Rientrò quando le campane suonarono le sette. Teresa le consigliò una trattoria sotto i portici, dove cenò con ravioli alle erbe e un bicchiere di vino rosso. Al tavolo vicino, due signore discutevano della ricetta migliore per conservare le pesche, confrontando quantità di zucchero e tempi di cottura con una serietà che fece sorridere Viola. Quando tornò in camera, il cielo sopra i tetti era diventato color lavanda e le tre dalie, nella brocca sul davanzale, sembravano ancora più luminose.</p>
+  <p>Prima di dormire aprì il quaderno che portava sempre in viaggio. Sulla prima pagina libera scrisse <em>Villa Glicine, ore dieci</em>. Rimase a guardare quelle parole per qualche istante, poi chiuse il quaderno senza aggiungere alternative.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>La domenica mattina si svegliò con il profumo del pane tostato che saliva dalla cucina. Teresa aveva preparato una colazione con yogurt, miele, pane caldo e una torta di mele ancora tiepida. Mentre versava il caffè, le indicò sulla mappa la strada per Villa Glicine: un percorso di circa mezz'ora a piedi, prima lungo una strada di campagna e poi attraverso un sentiero fra gli ulivi.</p>
+  <p>Viola partì poco dopo le nove e mezza. Il cielo era limpido, attraversato da qualche nuvola sottile, e una brezza leggera muoveva le foglie degli alberi. Superate le ultime case, la strada si aprì fra i vigneti. I grappoli d'uva pendevano pesanti sotto le foglie e, ai margini dei campi, crescevano cespugli di more e piccoli fiori selvatici. Ogni tanto Viola si fermava per guardare il paesaggio: i casali di pietra sulle colline, i cipressi disposti lungo i viali e le strisce di terra rossa fra i filari.</p>
+  <p>Villa Glicine apparve dietro una curva, circondata da un muro basso di pietra. Era una casa color miele, con un portico sorretto da colonne e grandi finestre verdi. Il cancello di ferro era aperto e, accanto all'ingresso, una lavagna annunciava con una scritta a gesso: <em>Benvenuti nel giardino delle cento dalie.</em></p>
+  <p>Il vialetto dei tigli conduceva a una terrazza erbosa, dove erano stati sistemati alcuni tavoli con brocche d'acqua e bicchieri. Da lì partivano diversi sentieri di ghiaia chiara, che scomparivano fra siepi, pergolati e alberi da frutto. Viola ne imboccò uno e, dopo pochi passi, si trovò davanti a una distesa di fiori.</p>
+  <p>Le dalie occupavano aiuole ampie e sinuose, separate da stretti camminamenti. Alcune piante arrivavano all'altezza delle sue spalle, altre formavano cespugli più bassi, fitti di corolle. I colori cambiavano gradualmente lungo i sentieri: dal bianco al giallo, dall'albicocca al rosa, fino al rosso intenso e al porpora. Qua e là, fra i fiori, crescevano verbene leggere e ciuffi di erbe ornamentali che si muovevano al vento. Le api passavano da una corolla all'altra e piccole farfalle color crema si posavano sui petali aperti.</p>
+  <p>All'inizio del percorso c'era una piccola mappa dipinta a mano. Le aiuole erano numerate da uno a cento, ciascuna con il nome di una varietà diversa. Viola seguì con il dito le linee dei sentieri e scoprì che il giardino era diviso in quattro zone, secondo i colori predominanti. La prima raccoglieva i bianchi e i gialli, la seconda le sfumature rosa e albicocca, la terza i rossi e i porpora, mentre l'ultima ospitava varietà screziate e bicolori.</p>
+  <p>Aveva appena cominciato a percorrere il sentiero delle dalie chiare quando una donna con un cappello di paglia e un grembiule verde si avvicinò per sistemare alcune etichette.</p>
+  <p class="battuta">«Sono Margherita» si presentò. «Benvenuta.»</p>
+  <p>Viola la ringraziò e le disse di aver saputo del giardino soltanto il giorno prima, grazie alla fioraia del mercato.</p>
+  <p class="battuta">«Allora sei capitata proprio nel momento giusto. Quest'anno le dalie hanno deciso di fiorire tutte insieme. Di solito qualcuna arriva in anticipo e qualcuna si fa aspettare.»</p>
+  <p>Margherita le raccontò che aveva iniziato a coltivarle molti anni prima, con sei tuberi ricevuti in regalo da un'amica. All'inizio occupavano una piccola aiuola accanto alla casa, poi erano diventate venti varietà, cinquanta, infine cento. Ogni anno ne aggiungeva qualcuna, scegliendola per il colore, la forma dei petali o semplicemente perché le piaceva il nome. Quando aveva raggiunto la centesima, aveva deciso di fermarsi con la collezione e dedicarsi a conoscerla meglio.</p>
+  <p class="battuta">«Cento è un bel numero» osservò Viola.</p>
+  <p class="battuta">«Lo è, ma non è stato un progetto fin dall'inizio. Quando ho piantato le prime sei, volevo soltanto vedere se sarebbero cresciute.»</p>
+  <p>Viola guardò le aiuole che si allungavano davanti a loro. Le sembrò curioso pensare che tutto quel giardino fosse cominciato senza un disegno preciso, da sei piccoli tuberi interrati accanto a un muro.</p>
+  <p class="battuta">«Hai già visto il pergolato?» le chiese Margherita.</p>
+  <p>Viola scosse la testa.</p>
+  <p class="battuta">«Allora non perdertelo. È in fondo al sentiero, oltre il piccolo stagno.»</p>
+  <p>Prima di allontanarsi, Margherita le indicò una dalia dalle sfumature rosa e crema. Si chiamava <em>Café au Lait</em> e aveva una corolla larga quasi quanto un piatto da frutta. Viola si chinò per osservarla meglio: i petali cambiavano colore dal centro verso l'esterno, passando dal rosa più caldo a una tonalità delicata, quasi avorio.</p>
+  <p>Proseguì verso lo stagno. L'acqua era quasi immobile, coperta in parte da foglie rotonde di ninfea. Una libellula azzurra si posò sul bordo di una pietra, mentre fra i giunchi si sentiva il lieve fruscio di qualche insetto nascosto. Poco oltre, un ponticello di legno conduceva a un pergolato ricoperto di vite americana. Sotto la volta verde erano sistemate due panche e un tavolo con una brocca d'acqua fresca, alcune mele e un piccolo quaderno dalla copertina di stoffa.</p>
+  <p>Viola si sedette e aprì il quaderno. Sulla prima pagina c'era scritto: <em>Se hai trovato un fiore che ti piace, raccontaci quale.</em></p>
+  <p>Le pagine erano piene di messaggi lasciati dai visitatori negli anni precedenti. Qualcuno aveva disegnato una dalia con matite colorate, altri avevano scritto poche righe sul proprio fiore preferito. Una bambina aveva annotato che le dalie gialle sembravano piccoli soli, mentre un signore aveva dichiarato di preferire quelle rosse perché gli ricordavano le tende della cucina di sua nonna. Viola sfogliò lentamente il quaderno, divertendosi a immaginare le persone che avevano lasciato quelle parole.</p>
+  <p>Prese la penna legata al tavolo con uno spago, ma rimase per qualche istante senza scrivere. Aveva visto soltanto una parte del giardino e pensò che forse avrebbe dovuto aspettare di aver osservato tutte le cento varietà prima di scegliere la sua preferita. Poi guardò le dalie color pesca che si intravedevano oltre il pergolato. Erano state le prime ad attirarla, fin dal mercato del giorno precedente, e continuavano a piacerle più delle altre.</p>
+  <p>Scrisse: <em>Oggi ho scoperto che esistono fiori color pesca. Non ho ancora visto tutte le cento dalie, ma credo di aver già trovato la mia preferita.</em></p>
+  <p>Richiuse il quaderno e rimase ancora qualche minuto sotto il pergolato, ascoltando il fruscio delle foglie. Dalla parte opposta del giardino arrivavano voci tranquille e il rumore delle stoviglie: qualcuno stava preparando i tavoli per il pranzo.</p>
+  <p>Quando tornò verso la casa, trovò Margherita intenta a sistemare alcuni vasi lungo la terrazza. Accanto a lei, un ragazzo cercava di appendere una ghirlanda di foglie fra due colonne, ma lo spago continuava a scivolare.</p>
+  <p>Viola si avvicinò. «Vi serve una mano?»</p>
+  <p>Margherita le porse un'estremità della ghirlanda e le indicò il gancio fissato alla colonna. Viola salì sul primo gradino della scala, tenne fermo lo spago mentre il ragazzo lo annodava e poi scese per controllare il risultato. La ghirlanda formava un arco leggermente irregolare sopra il tavolo, con alcune foglie che ricadevano verso il basso.</p>
+  <p class="battuta">«Così va benissimo» disse Margherita. «Le cose troppo dritte, in giardino, mi sembrano sempre fuori posto.»</p>
+  <p>Viola rise e rimase ad aiutare. Sistemò piccoli vasi di dalie sui tavoli, riempì alcune brocche d'acqua e distribuì tovaglioli di lino accanto ai piatti. Intanto arrivavano altre persone, alcune con ceste di pane, altre con teglie coperte da canovacci o grandi insalatiere. Una signora portò una crostata di prugne, un uomo arrivò con una forma di pecorino e due bambini deposero sul tavolo una ciotola di fichi appena raccolti.</p>
+  <p>Verso l'una, quando tutti ebbero trovato posto, Margherita invitò gli ospiti a servirsi. Viola si sedette accanto a una coppia che veniva ogni anno dalla città e a una ragazza che aveva portato una macchina fotografica analogica. Parlarono dei fiori, dei paesi vicini e dei sentieri che attraversavano le colline. Il pranzo proseguì lentamente, fra piatti passati da una mano all'altra, bicchieri riempiti e racconti che si intrecciavano senza fretta. Ogni tanto qualcuno si alzava per prendere un'altra fetta di pane o per fotografare la luce che filtrava attraverso le foglie del pergolato.</p>
+  <p>A un certo punto la ragazza con la macchina fotografica propose a Viola di accompagnarla fino all'aiuola delle dalie bicolori. Aveva visto una varietà con petali bianchi bordati di rosso e voleva fotografarla con la luce del pomeriggio.</p>
+  <p>Viola stava per rispondere che preferiva restare seduta ancora un poco. Non conosceva quella ragazza e non sapeva nulla di fotografia. Ma l'aiuola delle dalie bicolori era proprio quella che non aveva ancora visitato, così accettò.</p>
+  <p>Camminarono insieme lungo il sentiero e si fermarono davanti alla varietà indicata dalla ragazza. Le corolle sembravano dipinte a mano, con sottili strisce rosse che attraversavano i petali bianchi. La ragazza si chinò per cercare l'inquadratura migliore e chiese a Viola di tenere da parte un ramo che copriva uno dei fiori. Viola lo spostò delicatamente e rimase immobile mentre l'altra regolava la macchina fotografica.</p>
+  <p class="battuta">«Perfetto» disse la ragazza dopo aver scattato. «Grazie.»</p>
+  <p>Continuarono a passeggiare per qualche minuto, confrontando le varietà che preferivano. Quando tornarono verso la terrazza, Viola si accorse di aver visto tutte e quattro le zone del giardino senza aver seguito alcun programma.</p>
+  <p>Il dolce era già stato servito. Margherita aveva preparato una grande torta di mandorle e pesche, e ne offrì una fetta anche a Viola. Lei l'assaggiò e le chiese la ricetta. Margherita sorrise, andò in cucina e tornò con un foglietto sul quale aveva scritto gli ingredienti.</p>
+  <p class="battuta">«Il segreto è usare pesche molto mature» le spiegò. «E non avere fretta di toglierla dal forno.»</p>
+  <p>Viola ripiegò il foglio e lo infilò nella tasca della borsa, promettendo che avrebbe provato a prepararla una volta tornata a casa.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Nel pomeriggio il giardino si fece ancora più bello. Il sole, ormai più basso, attraversava i petali rendendoli quasi trasparenti e disegnava lunghe ombre sui sentieri di ghiaia. Alcuni visitatori ripresero a passeggiare fra le aiuole, altri si fermarono sotto gli alberi con un libro o una tazza di tè. Viola tornò verso lo stagno e percorse un sentiero che non aveva ancora esplorato, fino a raggiungere una piccola serra dalle finestre aperte.</p>
+  <p>Dentro, su lunghi tavoli di legno, erano disposti vasi di terracotta, attrezzi da giardinaggio e cassette piene di etichette. Accanto alla porta c'era un tavolino con alcune bustine di semi di fiori annuali e piccoli vasetti contenenti giovani piante di dalia. Un cartello spiegava che i visitatori potevano portare a casa una piantina, lasciando un contributo libero per la cura del giardino.</p>
+  <p>Viola si fermò davanti ai vasi. Da anni diceva di voler coltivare qualcosa sul balcone, ma non aveva mai cominciato. Prima il balcone le era sembrato troppo piccolo, poi troppo esposto al sole, poi aveva pensato che sarebbe stato meglio aspettare la primavera successiva. Ogni volta trovava un buon motivo per rimandare, finché anche l'idea più semplice finiva per diventare un progetto da organizzare con attenzione.</p>
+  <p>Prese in mano uno dei vasetti. La pianta aveva foglie verdi e robuste e un piccolo cartellino con il nome della varietà: <em>Gallery Art Deco</em>. Accanto al nome c'era una fotografia di una dalia dalle sfumature albicocca e pesca.</p>
+  <p>Margherita entrò nella serra con una cesta di piccoli attrezzi.</p>
+  <p class="battuta">«Hai trovato qualcosa che ti piace?»</p>
+  <p class="battuta">«Sì. Vorrei provare a coltivarla sul mio balcone. Però non ho molto spazio.»</p>
+  <p>Margherita osservò il vasetto e le spiegò che quella varietà era adatta alla coltivazione in contenitore. Le indicò la dimensione del vaso definitivo, il terriccio da utilizzare e la posizione migliore per ricevere luce senza esporre la pianta al sole più forte nelle ore centrali. Poi prese una matita e scrisse le istruzioni sul retro del cartellino.</p>
+  <p>Viola ascoltò con attenzione. Aveva già cominciato a pensare che sarebbe stato meglio comprare tutto il necessario una volta tornata a casa, studiare con calma le varietà e magari ordinare una pianta la primavera seguente. Guardò di nuovo il piccolo vaso che teneva fra le mani.</p>
+  <p class="battuta">«Questa posso portarla via oggi?»</p>
+  <p class="battuta">«Naturalmente» rispose Margherita. «È qui apposta.»</p>
+  <p>Viola scelse la piantina e lasciò il suo contributo nella cassetta accanto alla porta. Margherita le preparò una piccola confezione di cartone per proteggerla durante il viaggio e le mostrò come sistemarla in modo che il terriccio non si rovesciasse.</p>
+  <p>Prima di uscire, le indicò una fotografia appesa alla parete della serra. Ritraeva il giardino molti anni prima, quando al posto delle grandi aiuole c'era soltanto un prato con qualche albero da frutto e una fila di sei dalie accanto al muro.</p>
+  <p class="battuta">«Sono le prime?» chiese Viola.</p>
+  <p class="battuta">«Proprio loro.»</p>
+  <p>Nella fotografia Margherita era molto più giovane, con gli stessi capelli raccolti sotto un cappello di paglia. Teneva in mano un annaffiatoio e sorrideva verso l'obiettivo, mentre dietro di lei le sei dalie formavano una piccola fila colorata.</p>
+  <p class="battuta">«Le cento varietà sono arrivate una alla volta» spiegò Margherita. «Qualche anno ne ho aggiunte molte, altri anni nessuna. Ma il giardino era già bello quando ce n'erano soltanto sei.»</p>
+  <p>Viola guardò la fotografia ancora per qualche istante. Le piaceva l'idea che Margherita non avesse aspettato di avere un grande giardino per cominciare a coltivarlo.</p>
+  <p>Quando uscì dalla serra, il pomeriggio stava lentamente lasciando posto alla sera. Tornò verso il pergolato e si fermò ancora una volta davanti alle dalie color pesca. Le corolle erano illuminate da una luce calda, più morbida di quella del mattino, e le foglie proiettavano ombre leggere sul terreno. Viola sistemò meglio la confezione con la piantina nella borsa e scattò un'ultima fotografia.</p>
+  <p>Prima di andare via, cercò Margherita per salutarla. La trovò vicino al cancello, intenta a distribuire piccoli mazzi di fiori agli ultimi visitatori. Quando vide Viola, ne preparò uno con tre dalie color albicocca e qualche rametto di verde.</p>
+  <p class="battuta">«Per il viaggio di ritorno» disse, porgendoglielo.</p>
+  <p>Viola la ringraziò e le promise che avrebbe mandato una fotografia della propria dalia quando fosse fiorita. Margherita le rispose che sarebbe stata felice di vederla e le augurò buon viaggio.</p>
+  <p>La strada verso San Martino era immersa nella luce dorata del tardo pomeriggio. Viola camminava con il mazzo di fiori in una mano e la piccola pianta ben sistemata nella borsa, ascoltando il fruscio delle foglie e il canto degli uccelli fra gli ulivi. Quando raggiunse il paese, le ombre dei cipressi si allungavano sulla strada e dalle case arrivavano i primi profumi della cena.</p>
+  <p>Teresa era nel piccolo giardino della pensione, intenta ad annaffiare alcune piante di geranio. Vedendo i fiori e la confezione che Viola portava con sé, le chiese com'era andata la giornata.</p>
+  <p>Viola le raccontò delle cento varietà, del pranzo sotto il pergolato, della serra e della fotografia delle prime sei dalie. Teresa ascoltò con piacere e, quando Viola le mostrò la piantina, le indicò un vaso di terracotta inutilizzato vicino alla porta.</p>
+  <p class="battuta">«Se vuoi, puoi portarlo a casa. È della misura giusta per quando dovrai rinvasarla.»</p>
+  <p>Viola accettò volentieri. Sistemò il vaso nella borsa da viaggio, avvolgendolo con un asciugamano, poi salì in camera e mise le dalie recise nella brocca sul davanzale, accanto a quelle comprate il giorno prima. I due mazzi formavano una piccola nuvola di petali color pesca, illuminata dall'ultima luce della sera. La piantina, ancora nella sua confezione, trovò posto sulla scrivania vicino alla finestra.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Il lunedì mattina, prima di lasciare San Martino, Viola fece colazione vicino alla finestra della pensione. Fuori, il paese si stava svegliando: un uomo apriva le imposte della bottega di ceramiche, una donna attraversava la piazza con una cesta di pane e il campanile segnava le otto con rintocchi lenti e regolari. Teresa le preparò un pacchetto con due fette di torta di mele per il viaggio e la salutò sulla soglia.</p>
+  <p>Sul treno, Viola sistemò il mazzo di dalie sul sedile accanto e tenne la piantina vicino ai piedi, dove poteva controllare che rimanesse stabile. Attraverso il finestrino scorrevano vigneti, campi e piccoli paesi raccolti sulle colline. Ogni tanto riprendeva il cartellino scritto da Margherita e rileggeva le istruzioni, immaginando dove avrebbe sistemato il vaso sul balcone.</p>
+  <p>Quando arrivò a casa, il sole del pomeriggio illuminava le finestre. Viola posò la valigia in ingresso, riempì un vaso d'acqua fresca e sistemò le dalie recise sul tavolo della cucina. Poi portò la piantina sul balcone e la appoggiò nell'angolo più luminoso, vicino alla ringhiera. Le foglie si mossero appena nella brezza e una striscia di sole attraversò il bordo del piccolo vaso.</p>
+  <p>Rientrò per prendere il telefono. Sullo schermo c'era ancora una lunga lista di cose che avrebbe voluto fare: visitare una mostra, provare una ricetta, sistemare un angolo della casa, coltivare dei fiori. La scorse fino alla voce <em>Preparare il balcone</em>, che aveva scritto molti mesi prima. Questa volta la cancellò dalla lista delle idee e la aggiunse al calendario per il giorno seguente, insieme all'acquisto del terriccio e di un piccolo annaffiatoio.</p>
+  <p>Poi tornò fuori, prese una sedia e si sedette accanto alla pianta. Da lì poteva vedere i tetti delle case vicine, un tratto di cielo azzurro e i rami di un albero che crescevano oltre il cortile. Il balcone era piccolo, ma aveva abbastanza spazio per la sua dalia e per una sedia su cui fermarsi a guardarla.</p>
+  <p>Ripensò alla fotografia appesa nella serra di Villa Glicine: sei dalie in fila, un prato ancora quasi vuoto e Margherita con l'annaffiatoio in mano. Le cento varietà erano arrivate molto dopo, una stagione alla volta.</p>
+  <p>Viola si chinò per controllare il terriccio, poi spostò il vasetto di pochi centimetri, dove la luce arrivava meglio. Quando rientrò in cucina, lasciò la porta del balcone aperta. Dalla finestra poteva vedere la piccola pianta, le foglie illuminate dal sole e, sul tavolo, le dalie color pesca raccolte nel giardino.</p>
+  <p>Si preparò una tazza di tè e aprì il quaderno dei progetti. Alla pagina del balcone scrisse soltanto una frase: <em>La prima dalia è arrivata.</em></p>
+  <p>Poi prese la ricetta di Margherita e controllò se aveva in casa gli ingredienti per la torta di pesche. Le mancavano soltanto le mandorle. Sarebbe uscita a comprarle il mattino dopo.</p>
+  </article>
+
+  <div class="fine">
+    <p>Grazie di essere rimasto fino in fondo.</p>
+    <p><a href="metti-in-pausa-il-mondo.html">Torna a «Metti in pausa il mondo» →</a></p>
+  </div>
+</main>
+
+<footer>
+  <p>«Una caramella alla menta» è un marchio depositato. Testi di Paola Paika Sebastio.</p>
+  <p class="riga-privacy"><a href="privacy.html">Informativa privacy</a></p>
+</footer>
+</body>
+</html>

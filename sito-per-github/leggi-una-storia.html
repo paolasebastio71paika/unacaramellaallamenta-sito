@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leggi una storia — Una caramella alla menta</title>
+<meta name="description" content="Racconti da leggere con calma, senza che chiedano niente. Dalla sezione «Metti in pausa il mondo».">
+<link rel="icon" href="logo.png">
+<style>
+@font-face{font-family:'Caladea';src:url('font/Caladea-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+/* Il corsivo dei titoli: Instrument Serif, di Rodrigo Fuenzalida e Jordan
+   Egstad, licenza SIL Open Font (font/LICENZE.txt), servito dal sito come
+   gli altri.
+   Scelto misurando i rapporti fra le altezze delle lettere sulla copertina
+   a stampa a 300 dpi. Quei rapporti sono l'impronta di un carattere: non
+   cambiano col corpo ne' con la spaziatura.
+
+                       minuscole/maiuscole   aste/maiuscole
+     copertina                0,692               1,005
+     Instrument Serif         0,710               1,021
+     Cormorant Garamond       0,626               1,139
+
+   Su 92 combinazioni di carattere e peso, Instrument Serif sbaglia 0,055;
+   il secondo arrivato 0,097.
+
+   Qui prima c'era Cormorant Garamond, scelto confrontando larghezza e
+   spessore della parola «Caramella». Era una misura falsata: normalizzavo
+   sull'altezza del riquadro, che dipende dalle aste, e Cormorant ha le aste
+   molto piu' alte delle maiuscole. Cosi' premiavo proprio il carattere piu'
+   lontano. Il rapporto fra le altezze non si puo' falsare allo stesso modo. */
+@font-face{font-family:'Instrument Serif';src:url('font/InstrumentSerif-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --panna:#F7F3EA; --panna-alt:#EDE6D8; --salvia:#7E8E6F; --menta:#C4DCC8;
+  --oliva:#3E5222; --inchiostro:#23201A; --grigio:#6E6859; --bordo:#D8CEB9;
+  --font-testo:'Caladea',Georgia,'Times New Roman',serif;
+  --font-etichetta:'Carlito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-titolo:'Instrument Serif','Caladea',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--panna);color:var(--inchiostro);
+  font-family:var(--font-testo);font-size:1.19rem;line-height:1.68}
+main{max-width:36rem;margin:0 auto;
+  padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:1rem}
+a{color:var(--oliva)}
+p{margin:0}
+
+.torna{font-family:var(--font-etichetta);font-size:.92rem;padding-block:1.6rem 0;
+  display:block;color:var(--grigio);text-decoration:none}
+.torna:hover{color:var(--oliva)}
+
+.apertura{padding-block:1.6rem 0;display:flex;flex-direction:column;gap:1rem}
+h1{font-family:var(--font-titolo);font-style:italic;font-size:clamp(2.2rem,6.8vw,2.85rem);line-height:1.05;letter-spacing:.005em;
+  font-weight:400;margin:0;text-wrap:balance;color:var(--oliva)}
+.occhiello{color:var(--grigio);font-size:1.06rem;line-height:1.6}
+
+.elenco{list-style:none;margin:2.6rem 0 0;padding:0;
+  display:flex;flex-direction:column;gap:1.1rem}
+.racconto-voce{background:var(--panna-alt);border:1px solid var(--bordo);border-radius:12px;
+  padding:1.5rem 1.45rem 1.55rem;display:flex;flex-direction:column;gap:.55rem}
+.racconto-voce h2{font-family:var(--font-testo);font-size:1.38rem;line-height:1.26;
+  margin:0;font-weight:700;text-wrap:balance}
+.racconto-voce h2 a{color:var(--oliva);text-decoration:none}
+.racconto-voce h2 a:hover{text-decoration:underline;text-underline-offset:3px}
+.racconto-voce p{font-size:1.05rem;line-height:1.58}
+.quanto{font-family:var(--font-etichetta);font-size:.9rem;color:var(--grigio)}
+
+.coda{margin-top:2.8rem}
+.coda p{font-size:1.05rem;line-height:1.65;color:var(--grigio);font-style:italic}
+
+footer{max-width:36rem;margin:3.2rem auto 0;border-top:1px solid var(--bordo);
+  padding:2rem max(20px,env(safe-area-inset-left,0px)) 3.5rem}
+footer p{font-family:var(--font-etichetta);font-size:.86rem;line-height:1.55;color:var(--grigio)}
+a:focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+
+/* ---------- schermi grandi ----------
+   Questo e' un elenco da scorrere, non un testo da leggere di fila: puo' e
+   deve usare la larghezza. Titolo a sinistra, presentazione a destra, e i
+   racconti su due colonne. (Sulle pagine dei racconti vale il contrario:
+   li' la colonna stretta e' giusta, perche' si legge per venti minuti.) */
+@media (min-width:1100px){
+  main{max-width:64rem}
+  .apertura{
+    display:grid;
+    grid-template-columns:minmax(0,21.5rem) minmax(0,35rem);
+    column-gap:3.8rem;row-gap:1rem;align-items:start;
+    padding-block:2.4rem 0;
+  }
+  .apertura h1{grid-column:1;grid-row:1}
+  .apertura .occhiello{grid-column:2}
+  .elenco{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:1.4rem;margin-top:3.2rem;
+  }
+  .racconto-voce{padding:1.7rem 1.6rem 1.8rem}
+  .coda{max-width:35rem}
+}
+
+.riga-privacy{font-family:var(--font-etichetta);font-size:.88rem;margin-top:.9rem}
+.riga-privacy a{color:var(--salvia)}
+
+/* ---------- schermo grande: la scala ----------
+   La struttura di questa pagina gia' usa la larghezza. Quello che restava
+   da telefono era il corpo del testo: 19 px su uno schermo guardato da
+   sessanta centimetri sono piccoli. Cresce solo il testo che si legge —
+   non i titoli, che hanno gia' la loro scala, e non la testata, che e'
+   misurata sull'illustrazione. */
+@media (min-width:1100px){
+  body{font-size:1.32rem}
+  .occhiello,.sommario,.cosa{font-size:1.08rem}
+}
+</style>
+</head>
+<body>
+<main>
+  <a class="torna" href="metti-in-pausa-il-mondo.html">← Metti in pausa il mondo</a>
+
+  <div class="apertura">
+    <h1>Leggi una storia</h1>
+    <p class="occhiello">Racconti in cui non succede niente di grave. Nessuno corre, nessuno è in ritardo, e alla fine non c'è nessuna morale che ti aspetta dietro l'angolo.</p>
+    <p class="occhiello">Accanto a ciascuno trovi quanto dura, così scegli in base al tempo che hai adesso. E se ne lasci uno a metà, resta lì dov'era.</p>
+  </div>
+
+  <ul class="elenco">
+    <li class="racconto-voce">
+      <h2><a href="racconto-il-giardino-delle-cento-dalie.html">Il giardino delle cento dalie</a></h2>
+      <p>Un giardino privato che apre una domenica all’anno, cento varietà di dalie e una pianta piccola da portare a casa.</p>
+      <p class="quanto">Circa 19 minuti</p>
+    </li>
+    <li class="racconto-voce">
+      <h2><a href="racconto-la-felicita-delle-cose-impreviste.html">La felicità delle cose impreviste</a></h2>
+      <p>Un lago fra le montagne, due sconosciuti che ridono troppo e una donna che aveva deciso di non fidarsi più di nessuno.</p>
+      <p class="quanto">Circa 25 minuti</p>
+    </li>
+    <li class="racconto-voce">
+      <h2><a href="racconto-la-casa-delle-persiane-azzurre.html">La casa delle persiane azzurre</a></h2>
+      <p>Un paese di mare, una scatola di latta che qualcuno cerca da settimane e una città di sabbia costruita tanti anni fa.</p>
+      <p class="quanto">Circa 19 minuti</p>
+    </li>
+    <li class="racconto-voce">
+      <h2><a href="racconto-il-posto-accanto-al-finestrino.html">Il posto accanto al finestrino</a></h2>
+      <p>Una vespa che si mangia un cornetto, una ciotola che non serve a niente e quattro giorni in un paese di pietra chiara.</p>
+      <p class="quanto">Circa 16 minuti</p>
+    </li>
+  </ul>
+
+  <div class="coda">
+    <p>Ne arriva uno ogni tanto. Senza un calendario preciso, perché anche scriverli deve restare un piacere.</p>
+  </div>
+</main>
+
+<footer>
+  <p>«Una caramella alla menta» è un marchio depositato. Testi di Paola Paika Sebastio.</p>
+  <p class="riga-privacy"><a href="privacy.html">Informativa privacy</a></p>
+</footer>
+</body>
+</html>

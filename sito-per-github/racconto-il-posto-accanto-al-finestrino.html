@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il posto accanto al finestrino — Una caramella alla menta</title>
+<meta name="description" content="Un racconto da leggere con calma. Dalla sezione «Metti in pausa il mondo» di Una caramella alla menta.">
+<link rel="icon" href="logo.png">
+<style>
+@font-face{font-family:'Caladea';src:url('font/Caladea-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+/* Il corsivo dei titoli: Instrument Serif, di Rodrigo Fuenzalida e Jordan
+   Egstad, licenza SIL Open Font (font/LICENZE.txt), servito dal sito come
+   gli altri.
+   Scelto misurando i rapporti fra le altezze delle lettere sulla copertina
+   a stampa a 300 dpi. Quei rapporti sono l'impronta di un carattere: non
+   cambiano col corpo ne' con la spaziatura.
+
+                       minuscole/maiuscole   aste/maiuscole
+     copertina                0,692               1,005
+     Instrument Serif         0,710               1,021
+     Cormorant Garamond       0,626               1,139
+
+   Su 92 combinazioni di carattere e peso, Instrument Serif sbaglia 0,055;
+   il secondo arrivato 0,097.
+
+   Qui prima c'era Cormorant Garamond, scelto confrontando larghezza e
+   spessore della parola «Caramella». Era una misura falsata: normalizzavo
+   sull'altezza del riquadro, che dipende dalle aste, e Cormorant ha le aste
+   molto piu' alte delle maiuscole. Cosi' premiavo proprio il carattere piu'
+   lontano. Il rapporto fra le altezze non si puo' falsare allo stesso modo. */
+@font-face{font-family:'Instrument Serif';src:url('font/InstrumentSerif-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --panna:#F7F3EA; --panna-alt:#EDE6D8; --salvia:#7E8E6F; --menta:#C4DCC8;
+  --oliva:#3E5222; --inchiostro:#23201A; --grigio:#6E6859; --bordo:#D8CEB9;
+  --font-testo:'Caladea',Georgia,'Times New Roman',serif;
+  --font-etichetta:'Carlito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-titolo:'Instrument Serif','Caladea',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--panna);color:var(--inchiostro);font-family:var(--font-testo);font-size:1.19rem}
+a{color:var(--oliva)}
+img{max-width:100%}
+
+/* Colonna stretta e righe alte: sono venti minuti di lettura, l'occhio deve
+   trovare l'inizio della riga successiva senza cercarlo. Circa 65 battute
+   per riga, che e' la misura che stanca meno: misurata, non stimata. */
+main{max-width:36rem;margin:0 auto;
+  padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:1rem}
+
+.torna{font-family:var(--font-etichetta);font-size:.92rem;padding-block:1.6rem 0;
+  display:block;color:var(--grigio);text-decoration:none}
+.torna:hover{color:var(--oliva)}
+
+.apertura{padding-block:2.2rem 0;display:flex;flex-direction:column;gap:.9rem;
+  border-bottom:1px solid var(--bordo);padding-bottom:2rem;margin-bottom:2.4rem}
+h1{font-family:var(--font-titolo);font-style:italic;font-size:clamp(2.2rem,6.8vw,2.95rem);line-height:1.05;letter-spacing:.005em;
+  font-weight:400;margin:0;text-wrap:balance;color:var(--oliva)}
+.durata{font-family:var(--font-etichetta);font-size:.92rem;line-height:1.5;color:var(--grigio)}
+
+.racconto{font-size:1.22rem;line-height:1.78}
+.racconto p{margin:0 0 1.35rem}
+.racconto p:last-child{margin-bottom:0}
+.racconto .battuta{margin-bottom:1.1rem}
+/* I messaggi scambiati alla fine: corsivi e un poco rientrati, come una
+   voce che arriva da un altro posto. */
+.racconto .messaggio{font-style:italic;color:var(--grigio);
+  margin:0 0 1.1rem;padding-left:1.2rem;border-left:2px solid var(--bordo)}
+
+.fregio{display:flex;align-items:center;gap:.55rem;margin:2.6rem auto 2.8rem;
+  color:var(--oliva);opacity:.75;max-width:14rem}
+.fregio span{flex:1;height:1px;background:currentColor;opacity:.55}
+.fregio i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+.fine{margin-top:3.2rem;padding-top:2rem;border-top:1px solid var(--bordo);
+  display:flex;flex-direction:column;gap:.9rem}
+.fine p{margin:0;font-size:1.06rem;line-height:1.6;color:var(--grigio)}
+.fine a{font-family:var(--font-etichetta);font-weight:700;font-size:1rem}
+
+footer{max-width:36rem;margin:2.6rem auto 0;
+  padding:1.6rem max(20px,env(safe-area-inset-left,0px)) 3.5rem}
+footer p{font-family:var(--font-etichetta);font-size:.86rem;line-height:1.55;
+  color:var(--grigio);margin:0}
+a:focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+
+/* ---------- schermi grandi ----------
+   La colonna del racconto NON si allarga: a 65 battute per riga si legge per
+   venti minuti senza stancarsi, e allargarla peggiorerebbe la lettura. Ma il
+   titolo e la durata salgono nel margine sinistro, cosi' la pagina usa la
+   larghezza invece di essere un nastro in mezzo al vuoto. Il titolo resta
+   accanto al testo mentre si scorre, come il segno in un libro. */
+@media (min-width:1100px){
+  main,footer{max-width:64rem}
+  main{
+    display:grid;
+    grid-template-columns:minmax(0,21.5rem) minmax(0,36rem);
+    column-gap:3.8rem;align-items:start;
+  }
+  /* Il blocco di sinistra deve essere UN elemento solo. Tenendo il link e il
+     titolo separati e facendo "span 2" sul racconto, la griglia gonfiava
+     tutte e due le righe a meta' dei quattordicimila pixel del testo e il
+     titolo finiva a meta' racconto. */
+  main > *{grid-column:2}
+  .lato{
+    grid-column:1;grid-row:1;
+    position:sticky;top:2.4rem;align-self:start;
+  }
+  .lato .torna{padding-block:2.6rem 0}
+  .apertura{border-bottom:none;padding-bottom:0;margin-bottom:0;padding-block:1.4rem 0}
+  .racconto{grid-column:2;grid-row:1;padding-top:2.6rem}
+  .fine{grid-column:2;grid-row:2}
+}
+
+.riga-privacy{font-family:var(--font-etichetta);font-size:.88rem;margin-top:.9rem}
+.riga-privacy a{color:var(--salvia)}
+
+/* ---------- schermo grande, rifatto ----------
+   Prima qui c'era una griglia a due colonne con il titolo appiccicato a
+   sinistra. Dava alla pagina una gamba sola: il testo spinto a destra e
+   mezza larghezza vuota per tutta la lettura. Adesso il racconto sta al
+   centro come in un libro e cresce di corpo, cosi' la pagina usa lo
+   schermo invece di starci dentro. */
+@media (min-width:1100px){
+  main{display:block;max-width:44rem}
+  footer{max-width:44rem}
+  main > *{grid-column:auto}
+  .lato{position:static;display:block}
+  .lato .torna{padding-block:2.8rem 0}
+  .apertura{border-bottom:1px solid var(--bordo);
+    padding-block:1.6rem 2.2rem;margin-bottom:2.8rem}
+  .apertura h1{font-size:3.05rem;line-height:1.06}
+  .racconto{grid-column:auto;grid-row:auto;padding-top:0;
+    font-size:1.38rem;line-height:1.8}
+  .racconto p{margin:0 0 1.5rem}
+  .fine{grid-column:auto;grid-row:auto;font-size:1.1rem}
+}
+
+/* ---- testata, trapiantata da «Metti in pausa il mondo» ---- */
+/* ---- testata ----
+   Il testo sta a sinistra, non al centro: la zona calma e chiara di questa
+   immagine e' li' (muretto e cielo). Misurato sull'immagine prima di decidere. */
+.testata{--oliva:#3E5222;--inchiostro:#23201A;--grigio:#6E6859} /* testata sempre su velo chiaro: colori del tema chiaro anche in tema scuro */
+.testata{position:relative;width:100%;overflow:hidden;height:clamp(430px,42vw,620px)}
+.testata img{display:block;width:100%;height:100%;object-fit:cover;object-position:34% 48%}
+.testata::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 46% 64% at 26% 46%,
+    rgba(247,243,234,.86) 0%, rgba(247,243,234,.76) 36%,
+    rgba(247,243,234,.40) 66%, rgba(247,243,234,0) 100%);
+}
+.sopra{position:absolute;inset:0;z-index:2;display:flex;align-items:center;
+  justify-content:flex-start;
+  padding-left:max(7%,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));}
+.blocco{max-width:27rem;display:flex;flex-direction:column;align-items:flex-start;
+  gap:1.05rem;text-align:left}
+.nome{font-family:var(--font-titolo);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.3vw,3.4rem);line-height:1.04;letter-spacing:.005em;color:var(--oliva);
+  margin:0;text-wrap:balance}
+.intro{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--inchiostro);margin:0}
+
+/* Larghezze intermedie: la zona calma dell'immagine e' solo il 40% sinistro,
+   quindi il blocco va stretto o le righe finiscono sull'ulivo. Misurato: a
+   820 px l'introduzione scendeva a 1,8 di contrasto sul bordo destro. */
+@media (min-width:701px) and (max-width:1100px){
+  .blocco{max-width:22rem}
+  .nome{font-size:clamp(2.05rem,3.8vw,2.65rem)}
+  .intro{font-size:1.02rem;line-height:1.6}
+}
+
+
+@media (max-width:700px){
+  /* height:auto e' indispensabile, se no l'altezza vince su aspect-ratio */
+  .testata{height:clamp(420px,112vw,520px)}
+  .testata img{object-position:26% 48%}
+  .testata::after{
+    background:linear-gradient(to bottom,rgba(247,243,234,.88) 0%,
+      rgba(247,243,234,.78) 46%,rgba(247,243,234,.30) 78%,rgba(247,243,234,0) 100%);
+  }
+  .sopra{align-items:flex-start;padding-top:8%;padding-left:max(18px,env(safe-area-inset-left,0px))}
+  .blocco{max-width:19.5rem;gap:.85rem}
+  .nome{font-size:2.25rem}
+  .intro{font-size:1.04rem;line-height:1.6}
+  /* Sul telefono i riquadri uno sotto l'altro diventano una colonna lunga:
+     stretti i margini interni e lo spazio fra loro, senza toccare il corpo
+     del testo, che deve restare leggibile. */
+  .ingressi{margin-top:2.2rem;gap:.8rem}
+  .ingresso{padding:1.15rem 1.2rem 1.25rem;gap:.42rem}
+  .ingresso h2{font-size:1.24rem}
+  .ingresso p{font-size:1.01rem;line-height:1.5}
+  .coda{margin-top:2.4rem}
+}
+
+/* Il link di ritorno: adesso che il titolo e' salito nella testata, questo
+   resta da solo in cima alla colonna e senza aria finisce appiccicato alla
+   prima riga del racconto. */
+main > .torna{display:block;padding-block:2rem 1.8rem}
+
+/* ---- un asse solo, e la misura della colonna ----
+   Due cose insieme, perche' sono lo stesso problema.
+
+   Il titolo nella testata cominciava al 7% della larghezza e il racconto al
+   30%: due allineamenti diversi sulla stessa pagina. L'occhio leggeva quel
+   salto come «testo spinto a destra» anche se la colonna era centrata
+   davvero (centro 846 su una pagina larga 1707). Adesso il bordo sinistro
+   del titolo esce dalla stessa formula della colonna, quindi restano
+   allineati a qualunque larghezza.
+
+   E la colonna si allarga. Non allungando la riga, pero': cresce anche il
+   carattere, cosi' le battute per riga restano settantadue — misurate
+   contando le righe di un paragrafo vero, non stimate. Allargare lasciando
+   il corpo com'era avrebbe portato la riga a novanta battute, e dopo venti
+   minuti di racconto l'occhio perde il capo riga.
+
+   Lo sfumato si sposta col titolo: la zona chiara delle illustrazioni
+   finisce fra il 30 e il 38% della larghezza, quindi senza spostarlo il
+   titolo finirebbe sui fiori. */
+@media (min-width:1100px){
+  main,footer{max-width:56rem}
+  .racconto{font-size:1.70rem}
+  .sopra{padding-left:max(7%, calc((100vw - 56rem) / 2))}
+  .testata::after{background:radial-gradient(ellipse 52% 70% at 42% 46%,
+    rgba(247,243,234,.90) 0%, rgba(247,243,234,.82) 38%,
+    rgba(247,243,234,.44) 68%, rgba(247,243,234,0) 100%);}
+}
+</style>
+</head>
+<body>
+<header class="testata">
+  <img src="testata-finestrino.jpg" alt="">
+  <div class="sopra">
+    <div class="blocco">
+      <h1 class="nome">Il posto accanto al finestrino</h1>
+      <p class="intro">Un racconto di circa 16 minuti. Non devi finirlo oggi: se lo lasci a metà, resta qui.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="torna" href="metti-in-pausa-il-mondo.html">← Metti in pausa il mondo</a>
+<article class="racconto">
+  <p>La prima cosa che Marta notò fu una risata. Arrivava da un tavolino sotto il pergolato, insieme al tintinnio di alcune tazzine e al profumo del caffè. Era una risata limpida, contagiosa, di quelle che fanno voltare anche chi non ha seguito la conversazione. Marta si fermò sulla soglia del bar con la borsa ancora sulla spalla e vide una donna dai capelli castani, seduta di traverso su una sedia di ferro battuto, che cercava di spiegare qualcosa al cameriere gesticolando con un cucchiaino.</p>
+  <p class="battuta">«Le assicuro che il cornetto l'ho ordinato per mangiarlo. Se poi una vespa ha deciso che era più interessante di me, non significa che dobbiamo dividerlo a metà!»</p>
+  <p>Il cameriere rideva e tentava di recuperare il piattino, sul quale era rimasta una briciola di sfoglia. La donna lo trattenne ancora un istante.</p>
+  <p class="battuta">«Aspetti, però. La vespa ha mangiato gratis. Io il cappuccino lo pago.»</p>
+  <p>Marta sorrise prima di rendersene conto.</p>
+  <p>Era arrivata a Monteluce la sera precedente, con una piccola valigia e l'intenzione di trascorrere quattro giorni lontano dalle proprie abitudini. Negli ultimi mesi tutto le era sembrato faticosamente uguale: il lavoro, le telefonate, la spesa, le cene consumate davanti alla televisione. Non era successo nulla di particolarmente grave. Si era semplicemente accorta che aveva smesso di aspettarsi qualcosa di piacevole dalle giornate. La domenica precedente, mentre sistemava un cassetto, aveva trovato un vecchio taccuino pieno di indirizzi di posti che desiderava visitare. Ne aveva scelto uno quasi a caso e prenotato una stanza in una locanda sulle colline.</p>
+  <p>Monteluce era un paese di pietra chiara, circondato da ulivi e vigneti. La piazza principale aveva una fontana rotonda, due platani enormi e un bar con i tavolini sotto un pergolato di glicine. Al mattino l'aria profumava di pane caldo e foglie bagnate, mentre dalle strade che salivano verso la collina arrivava il suono delle campane delle biciclette e delle serrande che si aprivano.</p>
+  <p>Marta scelse un tavolino vicino alla ringhiera, da cui si vedeva la valle, e ordinò un cappuccino. Aveva portato con sé un libro, ma lo lasciò nella borsa. Preferiva osservare le case illuminate dal sole, i gerani sui balconi e le rondini che attraversavano la piazza.</p>
+  <p>La donna della vespa si alzò per pagare e, passando accanto al tavolo di Marta, notò il libro che spuntava dalla borsa.</p>
+  <p class="battuta">«È bello?» domandò.</p>
+  <p>Marta abbassò gli occhi verso la copertina. «Non lo so ancora. L'ho portato, ma non riesco mai ad andare oltre le prime pagine.»</p>
+  <p class="battuta">«Allora forse non è il libro giusto per oggi.»</p>
+  <p>Lo disse con tanta naturalezza che Marta alzò lo sguardo. La donna aveva occhi vivaci, un vestito azzurro a piccoli fiori bianchi e un paio di sandali color cuoio. Portava al polso diversi braccialetti sottili, che tintinnavano leggermente quando si muoveva.</p>
+  <p class="battuta">«Io sono Eloise» aggiunse, porgendole la mano.</p>
+  <p class="battuta">«Marta.»</p>
+  <p>Eloise indicò la sedia libera. «Posso sedermi un momento? Sto aspettando che apra il negozio di ceramiche e, a quanto pare, sono arrivata troppo presto.»</p>
+  <p>Marta annuì. Eloise si accomodò, appoggiò sul tavolo una borsa di stoffa decorata con limoni e chiamò il cameriere per ordinare un altro caffè. Nel giro di pochi minuti raccontò di essere venuta a Monteluce per acquistare una brocca dipinta a mano. Ne aveva già una, ma l'aveva regalata a un'amica che se n'era innamorata durante una cena.</p>
+  <p class="battuta">«E adesso ne vuoi una uguale?» chiese Marta.</p>
+  <p class="battuta">«No, sarebbe impossibile. Quella era bellissima. Voglio vedere quale mi piace oggi.»</p>
+  <p>Marta si ritrovò a sorridere di nuovo. C'era qualcosa di piacevole nel modo in cui Eloise parlava delle cose: senza attribuire loro un'importanza eccessiva, ma prestando attenzione ai particolari. Descriveva la brocca come avrebbe potuto descrivere un panorama, ricordando il colore dello smalto, la forma del manico e la piccola imperfezione vicino al bordo che l'aveva resa diversa dalle altre.</p>
+  <p class="battuta">«Sei qui in vacanza?» le chiese Eloise.</p>
+  <p class="battuta">«Per qualche giorno. Avevo bisogno di cambiare aria.»</p>
+  <p class="battuta">«Hai scelto bene. Qui l'aria cambia profumo a ogni strada.»</p>
+  <p>Marta guardò verso la piazza. «Tu vieni spesso?»</p>
+  <p class="battuta">«Abbastanza. Abito a una ventina di chilometri, ma ogni tanto mi invento una commissione per venire fin qui. Il pane del forno, una passeggiata, una brocca che non mi serve.»</p>
+  <p>Eloise bevve l'ultimo sorso di caffè e controllò l'orologio. Il negozio avrebbe aperto di lì a pochi minuti. Prima di alzarsi, però, indicò il vicolo che partiva dalla fontana.</p>
+  <p class="battuta">«Se non hai programmi, vieni a vedere le ceramiche. Il negozio è bellissimo anche se non compri niente.»</p>
+  <p>Marta esitò. Aveva pensato di trascorrere la mattina da sola, passeggiando senza una meta precisa. Poi guardò la piazza, il libro ancora chiuso e Eloise che aspettava una risposta senza mostrare alcuna impazienza.</p>
+  <p class="battuta">«Volentieri.»</p>
+  <p>Il negozio era in fondo a un vicolo fresco, dietro una porta verde scuro. All'interno, scaffali di legno occupavano le pareti fino al soffitto e sostenevano piatti, ciotole, brocche e piccoli vasi dipinti con rami di ulivo, limoni, papaveri e motivi geometrici. La luce entrava da una finestra affacciata su un cortile e si rifletteva sulle superfici smaltate, creando piccoli bagliori colorati.</p>
+  <p>La proprietaria, una donna con i capelli raccolti in un foulard, salutò Eloise come una vecchia conoscenza e le mostrò alcune brocche appena uscite dal forno. Eloise le esaminò una per una, sollevandole per sentirne il peso e osservando come la luce cambiava sulle decorazioni.</p>
+  <p>Marta si fermò davanti a una piccola ciotola color miele, con un ramo di lavanda dipinto all'interno. Era semplice, appena irregolare lungo il bordo, e le piaceva moltissimo. La prese in mano, la rigirò e poi la rimise sullo scaffale.</p>
+  <p>Eloise se ne accorse. «Non ti piace?»</p>
+  <p class="battuta">«Sì, molto. Ma non saprei cosa farne.»</p>
+  <p class="battuta">«Potresti metterci le olive.»</p>
+  <p class="battuta">«Non mangio spesso le olive.»</p>
+  <p class="battuta">«Le caramelle?»</p>
+  <p class="battuta">«Nemmeno quelle.»</p>
+  <p>Eloise rifletté per un istante, poi sorrise. «Allora lasciala vuota. È bella anche così.»</p>
+  <p>Marta rise. Era una possibilità alla quale non aveva pensato. Riprese la ciotola e la portò alla cassa. La proprietaria la avvolse in una carta sottile e la sistemò in una scatola, aggiungendo un piccolo nastro verde.</p>
+  <p>Quando uscirono, il sole aveva raggiunto i tetti più alti e il paese si era animato. Un uomo stava sistemando cassette di frutta davanti al negozio, due bambini attraversavano la piazza con i monopattini e dal forno arrivava il profumo della focaccia appena sfornata. Eloise aveva trovato una brocca color crema con un ramo di limone dipinto sul fianco. La teneva sotto il braccio, soddisfatta.</p>
+  <p class="battuta">«Ti va di fare due passi?» propose. «C'è un posto da cui si vede tutta la valle.»</p>
+  <p>Marta accettò. Camminarono lungo una strada che saliva dolcemente fra le case, poi imboccarono un sentiero lastricato che attraversava un piccolo giardino pubblico. Ai lati crescevano cespugli di rosmarino, lavanda e rose rampicanti. Una fontanella di pietra lasciava scorrere acqua fresca in una vasca rotonda, mentre alcune farfalle si posavano sui fiori.</p>
+  <p>Eloise si fermò davanti a un cespuglio di rose gialle.</p>
+  <p class="battuta">«Guarda questa.»</p>
+  <p>Marta si avvicinò. La rosa aveva i petali esterni quasi bianchi e quelli centrali di un giallo caldo, simile al colore del miele. Una goccia d'acqua era rimasta sospesa sul bordo di un petalo e rifletteva la luce del sole.</p>
+  <p class="battuta">«È bellissima» disse Marta.</p>
+  <p class="battuta">«Lo so. Passo di qui ogni volta che vengo a Monteluce. Non è mai esattamente uguale.»</p>
+  <p>Ripresero a camminare e raggiunsero il belvedere. Davanti a loro si apriva una valle ampia, con campi coltivati, filari di cipressi e piccoli casali sparsi sulle colline. Più lontano, le montagne apparivano azzurre nella foschia del mattino. Il vento muoveva lentamente le foglie degli ulivi e portava con sé il profumo della terra calda.</p>
+  <p>Si sedettero su una panchina all'ombra di un tiglio. Per qualche minuto rimasero in silenzio, guardando il paesaggio. Marta sentiva il fruscio delle foglie sopra la testa e, da un campo poco distante, il canto di un'allodola.</p>
+  <p class="battuta">«Posso farti una domanda?» disse infine Eloise.</p>
+  <p class="battuta">«Certo.»</p>
+  <p class="battuta">«Da quanto tempo non ti concedi qualcosa che ti piace senza dover trovare una ragione per farlo?»</p>
+  <p>Marta rimase sorpresa. Guardò la scatola con la ciotola, appoggiata accanto a sé, e pensò alla facilità con cui aveva cercato di convincersi a non comprarla. Poi ripensò al viaggio, alla prenotazione rimandata per settimane, al taccuino pieno di luoghi che desiderava vedere.</p>
+  <p class="battuta">«Da parecchio, credo.»</p>
+  <p>Eloise annuì, senza aggiungere subito nulla.</p>
+  <p class="battuta">«È strano» continuò Marta. «Una volta mi entusiasmavo per tante cose. Organizzavo gite, invitavo amici, compravo fiori per casa. Adesso faccio tutto quello che devo fare, ma quando arriva il momento di scegliere qualcosa soltanto per me non so mai da dove cominciare.»</p>
+  <p class="battuta">«Eppure stamattina hai comprato una ciotola bellissima.»</p>
+  <p>Marta sorrise. «Perché mi hai detto che potevo lasciarla vuota.»</p>
+  <p class="battuta">«Era vero.»</p>
+  <p class="battuta">«Sì, ma io non ci avrei pensato.»</p>
+  <p>Eloise si voltò verso la valle. «A volte diventiamo così abituati a chiederci a cosa servano le cose che ci dimentichiamo di chiederci se ci piacciono.»</p>
+  <p>Marta osservò il paesaggio. Le parole di Eloise le sembrarono semplici, eppure descrivevano qualcosa che conosceva bene. Negli ultimi mesi aveva cominciato a considerare superfluo quasi tutto ciò che non era strettamente necessario. Non aveva smesso di amare i fiori, le passeggiate o i pranzi con gli amici; aveva soltanto smesso di cercarli.</p>
+  <p>Rimasero ancora un poco sulla panchina. Poi Eloise si alzò e indicò un sentiero che scendeva verso un piccolo gruppo di case.</p>
+  <p class="battuta">«Se non hai fame, possiamo fare un giro fino al vecchio mulino. Hanno sistemato il giardino e ci sono dei tavoli sotto gli alberi. Fanno una limonata buonissima.»</p>
+  <p>Marta guardò l'orologio. Era quasi mezzogiorno. Aveva pensato di tornare alla locanda per pranzo, ma non aveva nessun impegno.</p>
+  <p class="battuta">«Andiamo.»</p>
+  <p>Il sentiero attraversava un boschetto di castagni e scendeva verso un torrente. L'acqua scorreva fra pietre chiare, formando piccole cascate e pozze trasparenti. Accanto al vecchio mulino era stato allestito un giardino con tavolini di legno, sedie colorate e grandi ombrelloni di tela. Alcune persone leggevano all'ombra, altre chiacchieravano davanti a bicchieri di limonata e piatti di frutta fresca.</p>
+  <p>Eloise scelse un tavolo vicino al torrente. Ordinarono due limonate con foglie di menta e una focaccia da dividere. Quando arrivò, la focaccia era ancora tiepida, con la superficie dorata e qualche cristallo di sale grosso. Marta ne assaggiò un pezzo e chiuse gli occhi per un istante, apprezzando il profumo del rosmarino e il sapore dell'olio buono.</p>
+  <p class="battuta">«Questa sì che è una buona ragione per uscire di casa» disse.</p>
+  <p>Eloise rise. «Vedi? Ne abbiamo già trovate tre: la ciotola, la rosa e la focaccia.»</p>
+  <p>Marta rise con lei. Si accorse che era la prima volta, da molto tempo, che trascorreva una mattina intera senza pensare a ciò che avrebbe dovuto fare dopo. Non aveva controllato il telefono, non aveva programmato il pomeriggio e non si era preoccupata di quanto tempo stesse passando. Aveva semplicemente seguito una conversazione, osservato dei fiori, camminato lungo un sentiero e assaggiato una focaccia deliziosa.</p>
+  <p>Dopo pranzo Eloise le propose di tornare verso il paese passando dalla strada degli orti. Era un percorso leggermente più lungo, ma attraversava una zona tranquilla dove le case avevano piccoli giardini affacciati sulla valle. Camminarono fra muretti di pietra coperti di edera, pergolati di vite e cancelli di ferro battuto. In un orto, un uomo stava raccogliendo pomodori maturi e li sistemava con cura in una cesta. Poco più avanti, una donna annaffiava dei gerani rossi appesi al balcone.</p>
+  <p>Marta osservava ogni cosa con un'attenzione nuova. Non perché il paesaggio fosse diverso da quello che aveva visto al mattino, ma perché aveva cominciato a notare particolari che di solito le sfuggivano: il colore delle persiane, il profumo delle erbe aromatiche, la forma delle nuvole sopra le colline.</p>
+  <p>Quando raggiunsero la piazza, il mercato dei fiori era quasi terminato. La fioraia stava sistemando gli ultimi mazzi in alcune cassette e il cameriere del bar raccoglieva le tazzine dai tavoli sotto il pergolato.</p>
+  <p>Eloise si fermò davanti alla fontana. «Io devo tornare a casa. Ho promesso di passare da mia sorella nel pomeriggio.»</p>
+  <p>Marta annuì. Si accorse che le dispiaceva salutarla. Avevano trascorso insieme soltanto poche ore, eppure le sembrava di conoscerla da molto più tempo.</p>
+  <p class="battuta">«Mi ha fatto piacere incontrarti» disse.</p>
+  <p class="battuta">«Anche a me. E mi raccomando, trova un bel posto per quella ciotola.»</p>
+  <p>Marta sorrise. «Credo che la metterò sul tavolo della cucina.»</p>
+  <p class="battuta">«Ottima scelta.»</p>
+  <p>Eloise fece qualche passo, poi si voltò. «Aspetta, quasi dimenticavo. Domani mattina, se sei ancora qui, al forno fanno delle brioche con la crema di limone. Le preparano soltanto il lunedì.»</p>
+  <p>Marta rise. «È un invito?»</p>
+  <p class="battuta">«È un'informazione preziosa. Gli inviti sono un'altra cosa.»</p>
+  <p>Si salutarono ridendo e Eloise attraversò la piazza con la sua brocca sotto il braccio, fermandosi un'ultima volta a scambiare due parole con la fioraia.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Marta rimase qualche minuto vicino alla fontana. Poi entrò nel negozio di alimentari e comprò un piccolo sacchetto di caramelle alla menta, che le ricordavano quelle che sua nonna teneva sempre in una scatola di latta. Tornò alla locanda attraversando lentamente il paese, con la scatola della ciotola in una mano e le caramelle nell'altra.</p>
+  <p>Nella sua camera, sistemò la ciotola sul tavolino vicino alla finestra. La liberò dalla carta, ne osservò ancora una volta il bordo irregolare e vi versò le caramelle alla menta. Il colore verde chiaro delle confezioni risaltava contro lo smalto color miele. Era un oggetto semplice, ma rendeva il tavolino più bello.</p>
+  <p>Marta aprì la finestra. Il pomeriggio aveva una luce calda e tranquilla, e dal vicolo arrivava il profumo di pane appena sfornato. Si sedette sulla poltroncina accanto al davanzale e prese il libro dalla borsa. Questa volta lo aprì davvero e cominciò a leggere. Le pagine scorrevano con facilità e, quando si fermò, si accorse di aver letto quasi tre capitoli.</p>
+  <p>Più tardi scese nella sala comune della locanda, dove la proprietaria stava sistemando alcuni vasi di fiori sui tavoli. Marta le chiese se conoscesse un posto dove poter acquistare una piccola pianta da portare a casa. La donna le indicò un vivaio poco fuori dal paese e le spiegò che la mattina seguente avrebbe potuto raggiungerlo con una passeggiata di venti minuti.</p>
+  <p>Marta tornò in camera e aprì il suo vecchio taccuino. Sfogliò le pagine piene di indirizzi e progetti rimandati, poi prese una penna e scrisse una nuova lista. Non era lunga: comprare una pianta, invitare un'amica a cena, tornare a vedere il mare, preparare una torta soltanto perché ne aveva voglia.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>La mattina seguente si svegliò presto. Il sole entrava dalla finestra e illuminava la ciotola piena di caramelle. Marta si vestì, scese a fare colazione e chiese alla proprietaria della locanda di indicarle la strada per il forno. Voleva assaggiare le brioche alla crema di limone di cui Eloise le aveva parlato.</p>
+  <p>Il forno era già aperto e una piccola fila di persone aspettava davanti al bancone. Marta acquistò una brioche e un cappuccino, poi si sedette a un tavolino vicino alla finestra. La crema era profumata e delicata, con una nota fresca di limone. Mentre mangiava, guardava la piazza che si animava lentamente e pensava alla giornata che l'aspettava.</p>
+  <p>Dopo colazione raggiunse il vivaio. Era un piccolo giardino circondato da una siepe di alloro, con file di piante aromatiche, fiori stagionali e alberelli da frutto. Una donna le mostrò alcune varietà adatte a un balcone soleggiato e Marta scelse una pianta di gelsomino, con foglie lucide e piccoli boccioli bianchi. La proprietaria la sistemò in una confezione di cartone per proteggerla durante il viaggio.</p>
+  <p>Marta tornò alla locanda con il gelsomino fra le braccia. Prima di salire in camera, si fermò nel cortile e osservò la pianta. I boccioli erano ancora chiusi, ma alcuni lasciavano già intravedere i petali bianchi. Immaginò il profumo che avrebbe riempito il balcone quando si fossero aperti.</p>
+  <p>Quella sera preparò la valigia con calma. Avvolse la ciotola nella carta e la sistemò fra i vestiti, controllò che il gelsomino fosse ben protetto e ripose il taccuino nella tasca esterna della borsa. Prima di dormire aprì la finestra e rimase qualche minuto a guardare le luci del paese.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Il giorno della partenza, mentre aspettava l'autobus nella piazza, vide Eloise attraversare la strada con una borsa di stoffa piena di libri. La riconobbe subito dal passo vivace e dai braccialetti che tintinnavano al polso.</p>
+  <p class="battuta">«Marta! Sei ancora qui?»</p>
+  <p class="battuta">«Sto per partire.»</p>
+  <p>Eloise si avvicinò e notò la confezione con il gelsomino.</p>
+  <p class="battuta">«Hai fatto acquisti.»</p>
+  <p class="battuta">«Sì. E ho assaggiato anche la brioche al limone.»</p>
+  <p class="battuta">«Allora il viaggio è stato un successo.»</p>
+  <p>Marta rise. «Direi proprio di sì.»</p>
+  <p>Rimasero a parlare per qualche minuto. Marta le raccontò del vivaio, del gelsomino e della ciotola che aveva riempito di caramelle alla menta. Eloise ascoltò con piacere, poi le chiese se avrebbe voluto tornare a Monteluce in primavera, quando i glicini sarebbero stati in fiore.</p>
+  <p class="battuta">«Mi piacerebbe» rispose Marta.</p>
+  <p class="battuta">«Allora scrivimi. Ti lascio il mio numero.»</p>
+  <p>Si scambiarono i contatti proprio mentre l'autobus compariva in fondo alla strada. Marta salutò Eloise e salì, scegliendo un posto accanto al finestrino. Sistemò il gelsomino sul sedile vicino e appoggiò la borsa sulle ginocchia.</p>
+  <p>Quando il mezzo ripartì, vide Eloise che la salutava dalla piazza, con una mano alzata e il sorriso luminoso di chi è contento di aver incontrato qualcuno. Marta ricambiò il saluto e rimase a guardare il paese che si allontanava, le case color miele, il campanile e i tetti illuminati dal sole.</p>
+  <p>Durante il viaggio aprì il taccuino. Le pagine erano ancora piene di luoghi da visitare e cose da fare, ma adesso le sembravano diverse. Non erano più un elenco di desideri rimandati: erano possibilità.</p>
+  <p>Prese la penna e, accanto alla voce <em>Monteluce</em>, scrisse una data e una parola: <em>Fatto.</em></p>
+  <p>Poi guardò il gelsomino sul sedile, con i suoi piccoli boccioli pronti ad aprirsi, e pensò alla ciotola color miele che avrebbe sistemato sul tavolo della cucina. Immaginò un mazzo di fiori freschi, una cena con un'amica, una passeggiata in un posto nuovo.</p>
+  <p>Il paesaggio scorreva oltre il finestrino, luminoso e verde, e Marta si accorse che aveva già voglia di tornare a casa. Non per riprendere le solite giornate, ma per cominciare a riempirle di cose belle.</p>
+  <p>Il telefono vibrò nella borsa. Era un messaggio di Eloise.</p>
+  <p class="messaggio">Ho appena visto una brocca bellissima in una vetrina. Non mi serve assolutamente. Credo che tornerò a comprarla.</p>
+  <p>Marta scoppiò a ridere, attirando per un istante lo sguardo divertito della signora seduta dall'altra parte del corridoio. Poi rispose:</p>
+  <p class="messaggio">Comprala. Al massimo ci metti i fiori.</p>
+  <p>Ripose il telefono, si sistemò più comodamente sul sedile e guardò fuori. Il sole illuminava le colline e, fra i campi, si vedevano piccoli casali con le persiane aperte. Marta seguì con lo sguardo una strada bianca che si perdeva fra gli ulivi, chiedendosi dove conducesse.</p>
+  <p>Per la prima volta dopo tanto tempo, le venne voglia di scoprirlo.</p>
+  </article>
+
+  <div class="fine">
+    <p>Grazie di essere rimasto fino in fondo.</p>
+    <p><a href="metti-in-pausa-il-mondo.html">Torna a «Metti in pausa il mondo» →</a></p>
+  </div>
+</main>
+
+<footer>
+  <p>«Una caramella alla menta» è un marchio depositato. Testi di Paola Paika Sebastio.</p>
+  <p class="riga-privacy"><a href="privacy.html">Informativa privacy</a></p>
+</footer>
+</body>
+</html>
