@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La felicità delle cose impreviste — Una caramella alla menta</title>
+<meta name="description" content="Un racconto da leggere con calma. Dalla sezione «Metti in pausa il mondo» di Una caramella alla menta.">
+<link rel="icon" href="logo.png">
+<style>
+@font-face{font-family:'Caladea';src:url('font/Caladea-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+/* Il corsivo dei titoli: Instrument Serif, di Rodrigo Fuenzalida e Jordan
+   Egstad, licenza SIL Open Font (font/LICENZE.txt), servito dal sito come
+   gli altri.
+   Scelto misurando i rapporti fra le altezze delle lettere sulla copertina
+   a stampa a 300 dpi. Quei rapporti sono l'impronta di un carattere: non
+   cambiano col corpo ne' con la spaziatura.
+
+                       minuscole/maiuscole   aste/maiuscole
+     copertina                0,692               1,005
+     Instrument Serif         0,710               1,021
+     Cormorant Garamond       0,626               1,139
+
+   Su 92 combinazioni di carattere e peso, Instrument Serif sbaglia 0,055;
+   il secondo arrivato 0,097.
+
+   Qui prima c'era Cormorant Garamond, scelto confrontando larghezza e
+   spessore della parola «Caramella». Era una misura falsata: normalizzavo
+   sull'altezza del riquadro, che dipende dalle aste, e Cormorant ha le aste
+   molto piu' alte delle maiuscole. Cosi' premiavo proprio il carattere piu'
+   lontano. Il rapporto fra le altezze non si puo' falsare allo stesso modo. */
+@font-face{font-family:'Instrument Serif';src:url('font/InstrumentSerif-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --panna:#F7F3EA; --panna-alt:#EDE6D8; --salvia:#7E8E6F; --menta:#C4DCC8;
+  --oliva:#3E5222; --inchiostro:#23201A; --grigio:#6E6859; --bordo:#D8CEB9;
+  --font-testo:'Caladea',Georgia,'Times New Roman',serif;
+  --font-etichetta:'Carlito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-titolo:'Instrument Serif','Caladea',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--panna);color:var(--inchiostro);font-family:var(--font-testo);font-size:1.19rem}
+a{color:var(--oliva)}
+img{max-width:100%}
+
+/* Colonna stretta e righe alte: sono venti minuti di lettura, l'occhio deve
+   trovare l'inizio della riga successiva senza cercarlo. Circa 65 battute
+   per riga, che e' la misura che stanca meno: misurata, non stimata. */
+main{max-width:36rem;margin:0 auto;
+  padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:1rem}
+
+.torna{font-family:var(--font-etichetta);font-size:.92rem;padding-block:1.6rem 0;
+  display:block;color:var(--grigio);text-decoration:none}
+.torna:hover{color:var(--oliva)}
+
+.apertura{padding-block:2.2rem 0;display:flex;flex-direction:column;gap:.9rem;
+  border-bottom:1px solid var(--bordo);padding-bottom:2rem;margin-bottom:2.4rem}
+h1{font-family:var(--font-titolo);font-style:italic;font-size:clamp(2.2rem,6.8vw,2.95rem);line-height:1.05;letter-spacing:.005em;
+  font-weight:400;margin:0;text-wrap:balance;color:var(--oliva)}
+.durata{font-family:var(--font-etichetta);font-size:.92rem;line-height:1.5;color:var(--grigio)}
+
+.racconto{font-size:1.22rem;line-height:1.78}
+.racconto p{margin:0 0 1.35rem}
+.racconto p:last-child{margin-bottom:0}
+.racconto .battuta{margin-bottom:1.1rem}
+/* I messaggi scambiati alla fine: corsivi e un poco rientrati, come una
+   voce che arriva da un altro posto. */
+.racconto .messaggio{font-style:italic;color:var(--grigio);
+  margin:0 0 1.1rem;padding-left:1.2rem;border-left:2px solid var(--bordo)}
+
+.fregio{display:flex;align-items:center;gap:.55rem;margin:2.6rem auto 2.8rem;
+  color:var(--oliva);opacity:.75;max-width:14rem}
+.fregio span{flex:1;height:1px;background:currentColor;opacity:.55}
+.fregio i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+.fine{margin-top:3.2rem;padding-top:2rem;border-top:1px solid var(--bordo);
+  display:flex;flex-direction:column;gap:.9rem}
+.fine p{margin:0;font-size:1.06rem;line-height:1.6;color:var(--grigio)}
+.fine a{font-family:var(--font-etichetta);font-weight:700;font-size:1rem}
+
+footer{max-width:36rem;margin:2.6rem auto 0;
+  padding:1.6rem max(20px,env(safe-area-inset-left,0px)) 3.5rem}
+footer p{font-family:var(--font-etichetta);font-size:.86rem;line-height:1.55;
+  color:var(--grigio);margin:0}
+a:focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+
+/* ---------- schermi grandi ----------
+   La colonna del racconto NON si allarga: a 65 battute per riga si legge per
+   venti minuti senza stancarsi, e allargarla peggiorerebbe la lettura. Ma il
+   titolo e la durata salgono nel margine sinistro, cosi' la pagina usa la
+   larghezza invece di essere un nastro in mezzo al vuoto. Il titolo resta
+   accanto al testo mentre si scorre, come il segno in un libro. */
+@media (min-width:1100px){
+  main,footer{max-width:64rem}
+  main{
+    display:grid;
+    grid-template-columns:minmax(0,21.5rem) minmax(0,36rem);
+    column-gap:3.8rem;align-items:start;
+  }
+  /* Il blocco di sinistra deve essere UN elemento solo. Tenendo il link e il
+     titolo separati e facendo "span 2" sul racconto, la griglia gonfiava
+     tutte e due le righe a meta' dei quattordicimila pixel del testo e il
+     titolo finiva a meta' racconto. */
+  main > *{grid-column:2}
+  .lato{
+    grid-column:1;grid-row:1;
+    position:sticky;top:2.4rem;align-self:start;
+  }
+  .lato .torna{padding-block:2.6rem 0}
+  .apertura{border-bottom:none;padding-bottom:0;margin-bottom:0;padding-block:1.4rem 0}
+  .racconto{grid-column:2;grid-row:1;padding-top:2.6rem}
+  .fine{grid-column:2;grid-row:2}
+}
+
+.riga-privacy{font-family:var(--font-etichetta);font-size:.88rem;margin-top:.9rem}
+.riga-privacy a{color:var(--salvia)}
+
+/* ---------- schermo grande, rifatto ----------
+   Prima qui c'era una griglia a due colonne con il titolo appiccicato a
+   sinistra. Dava alla pagina una gamba sola: il testo spinto a destra e
+   mezza larghezza vuota per tutta la lettura. Adesso il racconto sta al
+   centro come in un libro e cresce di corpo, cosi' la pagina usa lo
+   schermo invece di starci dentro. */
+@media (min-width:1100px){
+  main{display:block;max-width:44rem}
+  footer{max-width:44rem}
+  main > *{grid-column:auto}
+  .lato{position:static;display:block}
+  .lato .torna{padding-block:2.8rem 0}
+  .apertura{border-bottom:1px solid var(--bordo);
+    padding-block:1.6rem 2.2rem;margin-bottom:2.8rem}
+  .apertura h1{font-size:3.05rem;line-height:1.06}
+  .racconto{grid-column:auto;grid-row:auto;padding-top:0;
+    font-size:1.38rem;line-height:1.8}
+  .racconto p{margin:0 0 1.5rem}
+  .fine{grid-column:auto;grid-row:auto;font-size:1.1rem}
+}
+
+/* ---- testata, trapiantata da «Metti in pausa il mondo» ---- */
+/* ---- testata ----
+   Il testo sta a sinistra, non al centro: la zona calma e chiara di questa
+   immagine e' li' (muretto e cielo). Misurato sull'immagine prima di decidere. */
+.testata{--oliva:#3E5222;--inchiostro:#23201A;--grigio:#6E6859} /* testata sempre su velo chiaro: colori del tema chiaro anche in tema scuro */
+.testata{position:relative;width:100%;overflow:hidden;height:clamp(430px,42vw,620px)}
+.testata img{display:block;width:100%;height:100%;object-fit:cover;object-position:34% 48%}
+.testata::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 46% 64% at 26% 46%,
+    rgba(247,243,234,.86) 0%, rgba(247,243,234,.76) 36%,
+    rgba(247,243,234,.40) 66%, rgba(247,243,234,0) 100%);
+}
+.sopra{position:absolute;inset:0;z-index:2;display:flex;align-items:center;
+  justify-content:flex-start;
+  padding-left:max(7%,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));}
+.blocco{max-width:27rem;display:flex;flex-direction:column;align-items:flex-start;
+  gap:1.05rem;text-align:left}
+.nome{font-family:var(--font-titolo);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.3vw,3.4rem);line-height:1.04;letter-spacing:.005em;color:var(--oliva);
+  margin:0;text-wrap:balance}
+.intro{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--inchiostro);margin:0}
+
+/* Larghezze intermedie: la zona calma dell'immagine e' solo il 40% sinistro,
+   quindi il blocco va stretto o le righe finiscono sull'ulivo. Misurato: a
+   820 px l'introduzione scendeva a 1,8 di contrasto sul bordo destro. */
+@media (min-width:701px) and (max-width:1100px){
+  .blocco{max-width:22rem}
+  .nome{font-size:clamp(2.05rem,3.8vw,2.65rem)}
+  .intro{font-size:1.02rem;line-height:1.6}
+}
+
+
+@media (max-width:700px){
+  /* height:auto e' indispensabile, se no l'altezza vince su aspect-ratio */
+  .testata{height:clamp(420px,112vw,520px)}
+  .testata img{object-position:26% 48%}
+  .testata::after{
+    background:linear-gradient(to bottom,rgba(247,243,234,.88) 0%,
+      rgba(247,243,234,.78) 46%,rgba(247,243,234,.30) 78%,rgba(247,243,234,0) 100%);
+  }
+  .sopra{align-items:flex-start;padding-top:8%;padding-left:max(18px,env(safe-area-inset-left,0px))}
+  .blocco{max-width:19.5rem;gap:.85rem}
+  .nome{font-size:2.25rem}
+  .intro{font-size:1.04rem;line-height:1.6}
+  /* Sul telefono i riquadri uno sotto l'altro diventano una colonna lunga:
+     stretti i margini interni e lo spazio fra loro, senza toccare il corpo
+     del testo, che deve restare leggibile. */
+  .ingressi{margin-top:2.2rem;gap:.8rem}
+  .ingresso{padding:1.15rem 1.2rem 1.25rem;gap:.42rem}
+  .ingresso h2{font-size:1.24rem}
+  .ingresso p{font-size:1.01rem;line-height:1.5}
+  .coda{margin-top:2.4rem}
+}
+
+/* Il link di ritorno: adesso che il titolo e' salito nella testata, questo
+   resta da solo in cima alla colonna e senza aria finisce appiccicato alla
+   prima riga del racconto. */
+main > .torna{display:block;padding-block:2rem 1.8rem}
+
+/* ---- un asse solo, e la misura della colonna ----
+   Due cose insieme, perche' sono lo stesso problema.
+
+   Il titolo nella testata cominciava al 7% della larghezza e il racconto al
+   30%: due allineamenti diversi sulla stessa pagina. L'occhio leggeva quel
+   salto come «testo spinto a destra» anche se la colonna era centrata
+   davvero (centro 846 su una pagina larga 1707). Adesso il bordo sinistro
+   del titolo esce dalla stessa formula della colonna, quindi restano
+   allineati a qualunque larghezza.
+
+   E la colonna si allarga. Non allungando la riga, pero': cresce anche il
+   carattere, cosi' le battute per riga restano settantadue — misurate
+   contando le righe di un paragrafo vero, non stimate. Allargare lasciando
+   il corpo com'era avrebbe portato la riga a novanta battute, e dopo venti
+   minuti di racconto l'occhio perde il capo riga.
+
+   Lo sfumato si sposta col titolo: la zona chiara delle illustrazioni
+   finisce fra il 30 e il 38% della larghezza, quindi senza spostarlo il
+   titolo finirebbe sui fiori. */
+@media (min-width:1100px){
+  main,footer{max-width:56rem}
+  .racconto{font-size:1.70rem}
+  .sopra{padding-left:max(7%, calc((100vw - 56rem) / 2))}
+  .testata::after{background:radial-gradient(ellipse 52% 70% at 42% 46%,
+    rgba(247,243,234,.90) 0%, rgba(247,243,234,.82) 38%,
+    rgba(247,243,234,.44) 68%, rgba(247,243,234,0) 100%);}
+}
+</style>
+</head>
+<body>
+<header class="testata">
+  <img src="testata-terrazza.jpg" alt="">
+  <div class="sopra">
+    <div class="blocco">
+      <h1 class="nome">La felicità delle cose impreviste</h1>
+      <p class="intro">Un racconto di circa 25 minuti. Non devi finirlo oggi: se lo lasci a metà, resta qui.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="torna" href="metti-in-pausa-il-mondo.html">← Metti in pausa il mondo</a>
+<article class="racconto">
+  <p>La prima volta che Valeria sentì ridere Samuel, pensò che fosse una persona incapace di prendere qualcosa sul serio.</p>
+  <p>Era una risata piena, sonora, di quelle che cominciano dal petto e finiscono per coinvolgere chiunque si trovi nelle vicinanze. Arrivava dalla terrazza della Locanda del Salice, insieme al rumore delle tazzine e al profumo del pane appena tostato. Valeria era scesa per fare colazione e aveva trovato un uomo seduto a un tavolo, intento a raccontare qualcosa alla proprietaria. Lui rideva, lei si asciugava gli occhi con un tovagliolo e persino il gatto della locanda sembrava partecipare alla conversazione, osservandoli dalla sua sedia preferita.</p>
+  <p>Valeria scelse il tavolo più lontano.</p>
+  <p>Non aveva nulla contro le persone allegre. Semplicemente, negli ultimi tempi aveva imparato a diffidare di chi sembrava esserlo troppo. Le persone entusiaste facevano promesse con facilità, quelle cordiali entravano nella vita degli altri senza chiedere permesso e quelle che sorridevano sempre, secondo la sua esperienza, non erano necessariamente le più sincere. Preferiva i rapporti chiari, le distanze rispettate e le conversazioni che non richiedevano confidenze.</p>
+  <p>Era arrivata a Bellariva la sera precedente, dopo quasi tre ore di viaggio. Il paese sorgeva sulle rive di un lago alpino circondato da montagne, boschi di larici e prati che, all'inizio di giugno, erano ancora pieni di fiori selvatici. Le case avevano tetti di ardesia, balconi di legno e persiane dipinte in tutte le sfumature del verde. Una passeggiata lastricata seguiva la riva, passando sotto grandi salici dalle fronde argentate, mentre piccole barche a remi oscillavano accanto ai pontili.</p>
+  <p>Valeria aveva scelto quel posto proprio perché era lontano da tutto ciò che conosceva. Aveva prenotato quattro notti alla locanda e non aveva detto a nessuno dove sarebbe andata, salvo le informazioni indispensabili. Voleva leggere, camminare e trascorrere qualche giorno senza dover spiegare come stava.</p>
+  <p>La proprietaria, Agnese, le portò un cappuccino e un cestino di pane caldo.</p>
+  <p class="battuta">«Ha dormito bene?»</p>
+  <p class="battuta">«Benissimo, grazie.»</p>
+  <p class="battuta">«Oggi è una giornata splendida. Se le piace camminare, dovrebbe andare fino alla terrazza delle sorgenti. Il sentiero è facile e da lassù si vede tutto il lago.»</p>
+  <p>Valeria ringraziò. Aveva già studiato la mappa la sera prima e deciso di percorrere il lungolago fino al vecchio ponte. Non le piaceva cambiare programma, soprattutto quando il suggerimento arrivava da qualcuno che non conosceva.</p>
+  <p>Al tavolo vicino alla finestra, l'uomo che rideva si alzò per salutare Agnese. Era alto, con capelli scuri leggermente spettinati e una camicia azzurra arrotolata ai gomiti. Prima di uscire si fermò davanti alla porta, dove un raggio di sole attraversava il vetro e illuminava il pavimento.</p>
+  <p class="battuta">«Che meraviglia di giornata ci ha regalato il Signore» disse, guardando il lago.</p>
+  <p>Lo disse piano, quasi fra sé, senza rivolgersi a nessuno.</p>
+  <p>Valeria sollevò appena gli occhi dalla tazzina. Aveva già incontrato persone che parlavano continuamente di fede, spesso con l'aria di voler spiegare agli altri come vivere. Sperò che quell'uomo non fosse uno di loro.</p>
+  <p>Lui uscì fischiettando e la terrazza tornò tranquilla.</p>
+  <p>Dopo colazione, Valeria prese la borsa e raggiunse la passeggiata lungo il lago. L'acqua era così limpida che vicino alla riva si distinguevano le pietre sul fondale. Più lontano diventava turchese, poi blu intenso, riflettendo le montagne ancora chiazzate di neve. Un vento leggero muoveva le foglie dei salici e portava il profumo della resina dai boschi.</p>
+  <p>Camminò fino al vecchio ponte di pietra, attraversò un piccolo giardino pubblico e si fermò davanti a una bancarella che vendeva marmellate, miele e biscotti artigianali. La proprietaria stava sistemando alcuni barattoli quando una voce femminile, allegra e decisa, attirò l'attenzione di tutti.</p>
+  <p class="battuta">«Mi scusi, ma questo non è giusto.»</p>
+  <p>Valeria si voltò.</p>
+  <p>Una donna con un vestito giallo e una borsa di stoffa a righe colorate stava parlando con un uomo davanti al banco del noleggio delle barche. Aveva capelli castani raccolti in una coda morbida, occhi vivaci e un sorriso che, in quel momento, aveva lasciato il posto a un'espressione molto seria.</p>
+  <p class="battuta">«Il ragazzo le ha detto che il remo era già scheggiato» continuò. «L'ho sentito anch'io. Non può pretendere che paghi un danno che non ha fatto.»</p>
+  <p>Il proprietario del noleggio, un uomo robusto con il viso arrossato dal sole, indicò una barca tirata a secco.</p>
+  <p class="battuta">«Quando l'ha presa era tutto a posto.»</p>
+  <p class="battuta">«No, non era tutto a posto. E glielo ha segnalato prima di partire.»</p>
+  <p>Il ragazzo coinvolto nella discussione aveva forse vent'anni. Stringeva in mano un giubbotto salvagente e sembrava non sapere se parlare o restare in silenzio.</p>
+  <p>Valeria osservò la scena da qualche metro di distanza. Non amava le discussioni pubbliche. Le sembrava sempre che le persone finissero per esagerare, trasformando piccoli problemi in questioni personali. Stava per allontanarsi quando la donna dal vestito giallo si rivolse al ragazzo.</p>
+  <p class="battuta">«Hai una fotografia della barca prima di uscire?»</p>
+  <p>Lui annuì e prese il telefono. Mostrò alcune immagini scattate sul pontile, una delle quali ritraeva chiaramente il remo già danneggiato.</p>
+  <p class="battuta">«Ecco» disse la donna. «Adesso possiamo risolvere la questione senza accusare nessuno.»</p>
+  <p>Il proprietario guardò la fotografia, borbottò qualcosa e infine rinunciò alla richiesta di pagamento. Il ragazzo ringraziò più volte, visibilmente sollevato.</p>
+  <p>La donna tornò a sorridere.</p>
+  <p class="battuta">«Visto? Bastava guardare.»</p>
+  <p>Valeria, suo malgrado, sorrise anche lei.</p>
+  <p class="battuta">«Hai fatto bene a intervenire» disse una voce alle sue spalle.</p>
+  <p>Era l'uomo della locanda.</p>
+  <p class="battuta">«Samuel!» esclamò la donna, voltandosi. «Tu dove ti eri cacciato?»</p>
+  <p class="battuta">«A comprare il pane.»</p>
+  <p class="battuta">«E hai comprato tutto il forno?»</p>
+  <p>Samuel sollevò un sacchetto di carta decisamente troppo grande per una sola persona.</p>
+  <p class="battuta">«Agnese mi ha chiesto quattro filoni. Io ne ho presi cinque.»</p>
+  <p class="battuta">«Perché cinque?»</p>
+  <p class="battuta">«Il quinto profumava meglio degli altri.»</p>
+  <p>La donna scoppiò a ridere. Samuel la seguì con quella risata travolgente che Valeria aveva già sentito a colazione. Stavolta, però, le sembrò meno irritante.</p>
+  <p>Samuel notò Valeria e le rivolse un sorriso.</p>
+  <p class="battuta">«Ci siamo visti alla locanda, stamattina.»</p>
+  <p>Valeria annuì. «Sì.»</p>
+  <p class="battuta">«Io sono Samuel.»</p>
+  <p class="battuta">«Valeria.»</p>
+  <p class="battuta">«E io Barbara» intervenne la donna dal vestito giallo. «Piacere. Scusate la scena, ma quando vedo qualcuno che cerca di approfittarsi degli altri mi si rovina la giornata.»</p>
+  <p class="battuta">«Direi che gliel'hai sistemata» osservò Samuel.</p>
+  <p class="battuta">«A chi?»</p>
+  <p class="battuta">«Al ragazzo.»</p>
+  <p>Barbara rise.</p>
+  <p>Poi si rivolse a Valeria. «Sei in vacanza?»</p>
+  <p class="battuta">«Per qualche giorno.»</p>
+  <p class="battuta">«Anche noi. O meglio, io sono in vacanza. Samuel è qui per fotografare il lago e aiutare Agnese con alcune cose della locanda.»</p>
+  <p class="battuta">«Sono in vacanza anch'io» precisò lui.</p>
+  <p class="battuta">«Tu lavori anche quando dici di riposarti.»</p>
+  <p>Samuel sollevò le mani. «Mi piace rendermi utile.»</p>
+  <p>Barbara lo guardò con affetto, poi indicò il sentiero che saliva verso il bosco.</p>
+  <p class="battuta">«Stavamo per andare alla terrazza delle sorgenti. Dicono che sia bellissima. Ti va di venire?»</p>
+  <p>Valeria si irrigidì appena.</p>
+  <p class="battuta">«Grazie, ma avevo già previsto un altro giro.»</p>
+  <p class="battuta">«Nessun problema» rispose Barbara. «Magari ci incontriamo più tardi.»</p>
+  <p>Non insistette. Samuel la salutò con un cenno e i due si allontanarono, discutendo allegramente su quale strada prendere.</p>
+  <p>Valeria riprese a camminare lungo il lago.</p>
+  <p>Dopo pochi minuti si accorse che il sentiero che aveva scelto era interrotto da alcuni lavori di manutenzione. Un cartello indicava una deviazione attraverso il bosco. Consultò la mappa, valutò le alternative e decise di seguire il percorso segnalato.</p>
+  <p>La deviazione saliva fra alberi altissimi, con il terreno coperto di aghi di pino e piccoli fiori bianchi. Il sole filtrava attraverso i rami, disegnando macchie luminose sul sentiero. Dopo una ventina di minuti, Valeria raggiunse una radura attraversata da un ruscello. L'acqua scorreva fra pietre lisce e una piccola passerella di legno conduceva verso una terrazza panoramica.</p>
+  <p>Da lì arrivò una risata inconfondibile.</p>
+  <p>Samuel e Barbara erano seduti su una panca, davanti a una vista straordinaria.</p>
+  <p>Il lago occupava l'intera valle, incastonato fra montagne verdi e pareti di roccia chiara. Alcune nuvole bianche galleggiavano sopra le cime, mentre una cascata scendeva lungo il versante opposto, formando un sottile nastro argentato.</p>
+  <p>Barbara vide Valeria e spalancò le braccia.</p>
+  <p class="battuta">«Ma guarda chi c'è!»</p>
+  <p>Valeria si fermò, quasi imbarazzata.</p>
+  <p class="battuta">«Il sentiero lungo il lago era chiuso.»</p>
+  <p class="battuta">«Allora quella deviazione è stata una fortuna» disse Samuel.</p>
+  <p class="battuta">«Una coincidenza» precisò Valeria.</p>
+  <p>Samuel sorrise. «Va bene anche coincidenza.»</p>
+  <p>Barbara si spostò sulla panca, lasciandole posto.</p>
+  <p class="battuta">«Siediti. Da qui si vede meglio.»</p>
+  <p>Valeria esitò, poi si accomodò accanto a loro. Il panorama era davvero magnifico. L'aria profumava di timo selvatico e, dal bosco sottostante, arrivava il canto di un cuculo.</p>
+  <p>Barbara aprì la borsa e tirò fuori un sacchetto di biscotti alle nocciole.</p>
+  <p class="battuta">«Ne vuoi uno?»</p>
+  <p class="battuta">«No, grazie.»</p>
+  <p class="battuta">«Sicura? Sono buonissimi.»</p>
+  <p class="battuta">«Ho detto di no.»</p>
+  <p>Barbara richiuse il sacchetto senza offendersi. Samuel, invece, osservò Valeria per un istante e poi tornò a guardare il lago.</p>
+  <p>Rimasero in silenzio. Fu un silenzio piacevole, interrotto soltanto dal vento fra le foglie.</p>
+  <p>Dopo qualche minuto Barbara si alzò per fotografare il panorama. Si avvicinò al parapetto, sistemò il telefono e cercò un'inquadratura che comprendesse anche la cascata.</p>
+  <p>Samuel rimase seduto accanto a Valeria.</p>
+  <p class="battuta">«È la prima volta che vieni qui?»</p>
+  <p class="battuta">«Sì.»</p>
+  <p class="battuta">«Ti piace?»</p>
+  <p class="battuta">«Molto.»</p>
+  <p class="battuta">«Bellariva ha questo effetto. Ogni volta che torno, trovo qualcosa che non avevo notato.»</p>
+  <p>Valeria guardò il lago. «Tu ci vieni spesso?»</p>
+  <p class="battuta">«Da qualche anno. Ho conosciuto Agnese durante un viaggio e siamo rimasti amici. Quando posso, torno a darle una mano.»</p>
+  <p class="battuta">«Senza essere pagato?»</p>
+  <p>Samuel si voltò verso di lei, sorpreso dalla domanda.</p>
+  <p class="battuta">«Sì.»</p>
+  <p class="battuta">«Non è una cosa che fanno in molti.»</p>
+  <p class="battuta">«Forse. Ma lei ha fatto tanto per me quando ne avevo bisogno.»</p>
+  <p>Valeria non chiese altro. Samuel non aggiunse spiegazioni.</p>
+  <p>Barbara tornò con il telefono in mano.</p>
+  <p class="battuta">«Ho fatto una fotografia bellissima. Peccato che ci sia il mio dito nell'angolo.»</p>
+  <p>Samuel guardò lo schermo e scoppiò a ridere.</p>
+  <p class="battuta">«Barbara, hai fotografato soprattutto il dito.»</p>
+  <p class="battuta">«È un dito molto fotogenico.»</p>
+  <p>Valeria rise. Le uscì una risata breve, involontaria. Barbara la guardò con soddisfazione, ma ebbe il buon senso di non commentare.</p>
+  <p>Poco dopo ripresero il cammino insieme. Il sentiero scendeva dolcemente attraverso il bosco e raggiungeva un vecchio mulino trasformato in una piccola trattoria. Davanti all'ingresso c'erano tavoli di legno, ombrelloni di tela chiara e grandi vasi di gerani rossi. Il torrente scorreva a pochi metri, creando un sottofondo continuo e rilassante.</p>
+  <p>Barbara si fermò davanti alla lavagna del menù.</p>
+  <p class="battuta">«Gnocchi al burro e salvia. Torta di mirtilli. Io resto qui.»</p>
+  <p>Samuel guardò Valeria. «Ti va di pranzare con noi?»</p>
+  <p>Lei avrebbe potuto rifiutare. Aveva ancora il pomeriggio davanti, un libro in borsa e una camera tranquilla che l'aspettava. Ma il profumo del burro fuso e della salvia arrivava dalla cucina, il giardino era pieno di sole e Barbara stava già cercando un tavolo.</p>
+  <p class="battuta">«Va bene» rispose.</p>
+  <p>Si sedettero vicino al torrente. Samuel ordinò una zuppa d'orzo, Barbara gli gnocchi e Valeria una torta salata con verdure di stagione. Il cameriere portò pane caldo e una brocca d'acqua fresca con fettine di limone.</p>
+  <p>Durante il pranzo Barbara raccontò di lavorare in una libreria e di organizzare, nel tempo libero, raccolte di libri per una piccola associazione che aiutava famiglie in difficoltà. Non ne parlava come di qualcosa di straordinario. Raccontava soprattutto gli episodi divertenti: le scatole etichettate male, i volontari che si presentavano con dolci fatti in casa e un bambino che aveva chiesto se poteva prendere in prestito anche lo scaffale.</p>
+  <p class="battuta">«Mi arrabbio facilmente davanti alle ingiustizie» ammise. «Però non voglio passare la vita arrabbiata. Preferisco fare qualcosa.»</p>
+  <p>Samuel annuì. «È una delle cose che ammiro di te.»</p>
+  <p>Barbara gli sorrise. «E io ammiro il fatto che tu riesca a mantenere la calma anche quando io la perdo.»</p>
+  <p class="battuta">«Non sempre.»</p>
+  <p class="battuta">«Quasi sempre.»</p>
+  <p>Valeria li ascoltava con attenzione. Si conoscevano da alcuni anni, avevano caratteri molto diversi e sembravano accettarlo senza difficoltà. Barbara parlava con entusiasmo, Samuel ascoltava e interveniva con poche parole. Ogni tanto lui scoppiava in una delle sue risate contagiose, e Barbara finiva per ridere ancora più forte.</p>
+  <p class="battuta">«E tu, Valeria?» chiese Barbara. «Che cosa ti piace fare?»</p>
+  <p>La domanda la colse impreparata.</p>
+  <p class="battuta">«Lavoro molto.»</p>
+  <p class="battuta">«Non ti ho chiesto che lavoro fai.»</p>
+  <p>Valeria abbassò gli occhi sul piatto.</p>
+  <p class="battuta">«Leggo. Mi piace viaggiare, quando posso.»</p>
+  <p class="battuta">«Che genere di libri?»</p>
+  <p class="battuta">«Un po' di tutto.»</p>
+  <p>Barbara si accorse che le risposte diventavano sempre più brevi. Cambiò argomento, raccontando di un viaggio in cui aveva sbagliato treno e si era ritrovata in un paese dove si svolgeva una festa dedicata alle ciliegie.</p>
+  <p class="battuta">«È stata una giornata meravigliosa» concluse. «Ho mangiato ciliegie, comprato una tovaglia ricamata e conosciuto una signora che mi ha insegnato a fare la marmellata.»</p>
+  <p class="battuta">«E sei arrivata dove dovevi andare?» chiese Valeria.</p>
+  <p class="battuta">«Il giorno dopo.»</p>
+  <p>Samuel rise così forte che il cameriere si voltò.</p>
+  <p>Valeria scosse la testa, divertita. «Io sarei impazzita.»</p>
+  <p class="battuta">«Lo so» rispose Barbara. «Per questo dovresti viaggiare con me almeno una volta.»</p>
+  <p>Il pranzo terminò con tre fette di torta ai mirtilli, perché Barbara sostenne che sarebbe stato ingiusto lasciare Samuel e Valeria senza dolce mentre lei lo mangiava.</p>
+  <p>Quando tornarono verso Bellariva, il sole era già alto e il lago brillava fra gli alberi. Camminarono lentamente, fermandosi ogni tanto per osservare un fiore o una piccola cascata. Samuel portava la macchina fotografica a tracolla e, quando trovava un'inquadratura interessante, chiedeva agli altri di aspettarlo.</p>
+  <p>A metà percorso incontrarono una coppia di anziani che cercava di orientarsi davanti a un bivio. La donna teneva in mano una mappa piegata, mentre l'uomo osservava i cartelli con aria perplessa.</p>
+  <p class="battuta">«Scusate, per tornare al paese dobbiamo andare a destra o a sinistra?» chiese la donna.</p>
+  <p>Valeria indicò il sentiero di destra.</p>
+  <p class="battuta">«Da quella parte. È il percorso più breve.»</p>
+  <p>Samuel guardò la coppia. «Se volete, possiamo accompagnarvi. Stiamo tornando anche noi.»</p>
+  <p>L'uomo sorrise. «Sarebbe gentile.»</p>
+  <p>Valeria trattenne un sospiro. Il passo dei due anziani era molto lento e lei avrebbe preferito rientrare prima di sera. Tuttavia Samuel e Barbara si erano già messi a camminare accanto a loro, adattandosi senza difficoltà al loro ritmo.</p>
+  <p>La donna raccontò di essere venuta a Bellariva con il marito per festeggiare quarant'anni di matrimonio. Avevano trascorso la mattina al belvedere e si erano fermati così spesso a fotografare il panorama da perdere il conto dei sentieri percorsi.</p>
+  <p class="battuta">«Quarant'anni!» esclamò Barbara. «Allora dovete dirci qual è il segreto.»</p>
+  <p>L'uomo guardò la moglie. «Lasciarle scegliere il ristorante.»</p>
+  <p>Lei rise. «E non ascoltarlo quando dice che conosce una scorciatoia.»</p>
+  <p>Samuel scoppiò a ridere e Valeria sorrise. La conversazione proseguì fra ricordi di viaggi, piccoli battibecchi affettuosi e racconti di famiglia. Quando raggiunsero il paese, la coppia li ringraziò e li salutò davanti alla piazza.</p>
+  <p>Barbara guardò Samuel. «Hai visto? Abbiamo conosciuto due persone meravigliose.»</p>
+  <p class="battuta">«Sì.»</p>
+  <p>Valeria osservò la coppia che si allontanava tenendosi per mano. «Siamo arrivati quasi un'ora dopo.»</p>
+  <p>Samuel la guardò senza perdere il sorriso.</p>
+  <p class="battuta">«Avevi un appuntamento?»</p>
+  <p class="battuta">«No.»</p>
+  <p class="battuta">«Allora abbiamo guadagnato un'ora di belle storie.»</p>
+  <p>Valeria non rispose. Quella frase le sembrò un po' troppo ottimista, ma non poteva negare che la passeggiata fosse stata piacevole.</p>
+  <p>La sera si ritrovarono sulla terrazza della locanda. Agnese aveva preparato una cena semplice, con verdure grigliate, formaggi di montagna e pane appena sfornato. Alcuni ospiti chiacchieravano sotto il pergolato, mentre il lago rifletteva le prime luci del tramonto.</p>
+  <p>Barbara arrivò con un mazzo di piccoli fiori bianchi.</p>
+  <p class="battuta">«Li ho comprati dalla signora del mercato. Dice che si chiamano astranzie.»</p>
+  <p>Li sistemò in un bicchiere d'acqua al centro del tavolo, poi si sedette accanto a Valeria.</p>
+  <p class="battuta">«Domani Samuel vuole portarci al Lago delle Stelle. È più in alto, fra le montagne. Dicono che l'acqua sia così limpida da riflettere anche le nuvole più piccole.»</p>
+  <p class="battuta">«Non so se verrò» rispose Valeria.</p>
+  <p>Barbara annuì. «Va bene.»</p>
+  <p>Samuel arrivò poco dopo, con tre bicchieri di limonata fresca. Ne porse uno a Valeria e si sedette.</p>
+  <p class="battuta">«Barbara ti ha parlato del lago?»</p>
+  <p class="battuta">«Sì.»</p>
+  <p class="battuta">«È un posto speciale. Ci vado spesso quando ho bisogno di ritrovare un po' di silenzio.»</p>
+  <p>Valeria guardò il bicchiere.</p>
+  <p class="battuta">«Tu sembri sempre sereno.»</p>
+  <p>Samuel sorrise. «Non sempre.»</p>
+  <p class="battuta">«Eppure ridi continuamente.»</p>
+  <p class="battuta">«Rido perché mi piace ridere. Non perché la mia vita sia perfetta.»</p>
+  <p>Barbara lo guardò con affetto.</p>
+  <p>Samuel rimase qualche istante in silenzio, osservando il lago.</p>
+  <p class="battuta">«La fede mi aiuta molto» disse poi. «Quando le cose non vanno come vorrei, prego. Non sempre trovo una risposta, ma mi sento meno solo. Credo che Dio sia presente anche nei momenti in cui non capiamo quello che succede.»</p>
+  <p>Valeria ascoltò senza interromperlo.</p>
+  <p class="battuta">«Io faccio fatica a fidarmi delle persone» ammise infine. «Figuriamoci di qualcosa che non posso vedere.»</p>
+  <p>Samuel annuì.</p>
+  <p class="battuta">«Capisco.»</p>
+  <p>Valeria lo guardò, sorpresa. Si aspettava una spiegazione, un tentativo di convincerla, forse una frase sul fatto che avrebbe dovuto avere più fede. Invece Samuel bevve un sorso di limonata e tornò a osservare il tramonto.</p>
+  <p class="battuta">«Tutto qui?» chiese lei.</p>
+  <p class="battuta">«Che cosa?»</p>
+  <p class="battuta">«Non cerchi di farmi cambiare idea?»</p>
+  <p>Samuel sorrise.</p>
+  <p class="battuta">«Non sarebbe un bel modo di cominciare un'amicizia.»</p>
+  <p>Barbara rise. «E poi, Valeria, se Samuel cominciasse a convincere tutti di qualcosa, dovrebbe iniziare da me. Sono anni che cerco di spiegargli che le fotografie migliori si fanno quando le persone non se ne accorgono.»</p>
+  <p class="battuta">«E io sono anni che cerco di spiegarti che mettere il dito davanti all'obiettivo non è una tecnica fotografica.»</p>
+  <p>Barbara gli lanciò un tovagliolo. Samuel scoppiò a ridere e Valeria, questa volta, rise con loro senza trattenersi.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Il giorno seguente Valeria si svegliò presto. Aprì la finestra e vide il lago ancora avvolto da una leggera foschia. Le montagne emergevano lentamente dalla luce del mattino e il cielo era di un azzurro pallido, quasi trasparente.</p>
+  <p>Aveva deciso di non partecipare all'escursione. Avrebbe trascorso la giornata da sola, leggendo sulla terrazza e passeggiando lungo il lago. Era il programma che aveva immaginato prima di arrivare a Bellariva, e non voleva rinunciarvi soltanto perché aveva incontrato due persone simpatiche.</p>
+  <p>Scese a fare colazione poco dopo le otto. Agnese le portò il cappuccino e le chiese se avrebbe raggiunto Samuel e Barbara.</p>
+  <p class="battuta">«No, oggi preferisco restare qui.»</p>
+  <p class="battuta">«Come vuole. Il lago è bello anche dalla terrazza.»</p>
+  <p>Valeria sorrise e aprì il libro.</p>
+  <p>Dopo qualche pagina, però, si accorse che continuava a guardare verso il sentiero che saliva al bosco. Immaginava Barbara intenta a fotografare ogni fiore, Samuel che rideva per qualche battuta e i due che si fermavano a osservare il panorama. Si chiese se avessero portato abbastanza acqua, se Barbara avesse scelto scarpe adatte e se Samuel avesse controllato le previsioni del tempo.</p>
+  <p>Poi si irritò con sé stessa. Non erano affari suoi.</p>
+  <p>Verso le dieci, mentre stava bevendo un secondo caffè, il telefono vibrò.</p>
+  <p>Era un messaggio di Barbara.</p>
+  <p class="messaggio">Abbiamo trovato una distesa di fiori viola. Samuel dice che sono genziane. Io dico che sembrano un tappeto da favola.</p>
+  <p>Seguiva una fotografia di un prato illuminato dal sole, con centinaia di piccoli fiori viola sparsi fra l'erba.</p>
+  <p>Pochi minuti dopo arrivò un messaggio di Samuel.</p>
+  <p class="messaggio">Il lago è bellissimo. Ti sarebbe piaciuto.</p>
+  <p>Valeria guardò la fotografia a lungo. Poi scrisse:</p>
+  <p class="messaggio">Buona passeggiata.</p>
+  <p>Rimase qualche istante con il telefono in mano. Avrebbe voluto aggiungere qualcosa, ma non sapeva cosa. Alla fine lo ripose nella borsa e tornò al libro.</p>
+  <p>Nel primo pomeriggio uscì per una passeggiata lungo la riva. Il paese era tranquillo, con le finestre aperte e i balconi pieni di fiori. Davanti alla fontana incontrò il ragazzo del noleggio delle barche, quello che Barbara aveva difeso il giorno prima. Stava sistemando alcuni giubbotti salvagente su una rastrelliera.</p>
+  <p class="battuta">«Buongiorno» la salutò.</p>
+  <p>Valeria ricambiò il saluto.</p>
+  <p>Il ragazzo esitò, poi sorrise. «La sua amica è stata davvero gentile ieri.»</p>
+  <p>Valeria stava per precisare che Barbara non era sua amica, che si conoscevano appena. Ma le parole le rimasero in gola.</p>
+  <p class="battuta">«Sì» rispose. «È fatta così.»</p>
+  <p>Il ragazzo annuì. «Si vede.»</p>
+  <p>Valeria proseguì lungo il lago. Si fermò su una panchina all'ombra di un salice e rimase a guardare l'acqua. Ripensò alla facilità con cui aveva quasi negato quell'amicizia. Non perché Barbara le fosse antipatica, ma perché chiamare qualcuno amico significava ammettere che quella persona poteva diventare importante.</p>
+  <p>E Valeria, da tempo, preferiva non correre quel rischio.</p>
+  <p>Negli anni aveva conosciuto persone che si erano mostrate disponibili soltanto finché avevano avuto qualcosa da ottenere. Altre avevano ascoltato le sue confidenze per poi usarle come argomento di conversazione con qualcun altro. Non erano state esperienze drammatiche, ma sufficienti a renderla prudente. Aveva cominciato a raccontare sempre meno di sé, a rispondere con frasi brevi e a mantenere una distanza che le sembrava rassicurante.</p>
+  <p>Il problema era che, con il tempo, quella distanza era diventata così grande da lasciare fuori anche le persone che avrebbero potuto farle bene.</p>
+  <p>Valeria guardò il lago. Un piccolo battello attraversava l'acqua lasciando dietro di sé una scia luminosa. Sulla riva opposta, alcune case sembravano minuscole fra gli alberi.</p>
+  <p>Prese il telefono e aprì la conversazione con Barbara.</p>
+  <p class="messaggio">Com'è il Lago delle Stelle?</p>
+  <p>La risposta arrivò quasi subito.</p>
+  <p class="messaggio">Meraviglioso! Ma Samuel ha perso il cappello e io sto cercando di convincerlo che il vento è un ladro professionista.</p>
+  <p>Valeria sorrise.</p>
+  <p>Poco dopo arrivò una fotografia: Samuel, senza cappello, rideva davanti a un lago turchese circondato da montagne.</p>
+  <p>Valeria la guardò e, per la prima volta, si accorse che quella risata le mancava.</p>
+  <p>Quando Samuel e Barbara tornarono alla locanda, nel tardo pomeriggio, trovarono Valeria seduta sulla terrazza con tre bicchieri di limonata e un piatto di biscotti alle nocciole.</p>
+  <p>Barbara si fermò sulla soglia.</p>
+  <p class="battuta">«Ma guarda!»</p>
+  <p>Valeria alzò gli occhi dal libro.</p>
+  <p class="battuta">«Ho pensato che avreste avuto sete.»</p>
+  <p>Samuel sorrise. «Avevi ragione.»</p>
+  <p>Barbara si sedette accanto a lei e prese un biscotto.</p>
+  <p class="battuta">«Sai che abbiamo parlato di te?»</p>
+  <p>Valeria si irrigidì appena.</p>
+  <p class="battuta">«Ah sì?»</p>
+  <p class="battuta">«Sì. Samuel diceva che ti sarebbe piaciuto fotografare il riflesso delle montagne nell'acqua. Io invece dicevo che avresti trovato bellissimi i fiori lungo il sentiero.»</p>
+  <p>Valeria li guardò. Avevano parlato di lei senza criticarla, senza giudicarla e senza cercare di interpretare la sua assenza come un'offesa. Avevano semplicemente pensato a ciò che avrebbe potuto piacerle.</p>
+  <p class="battuta">«Forse avrei dovuto venire» ammise.</p>
+  <p>Barbara sorrise. «Ci sarà un'altra occasione.»</p>
+  <p>Samuel annuì. «Il lago resta lì.»</p>
+  <p>Quella sera cenarono insieme sulla terrazza. Barbara raccontò dell'escursione, Samuel mostrò alcune fotografie e Valeria ascoltò con interesse, facendo domande sui luoghi che avevano visitato. A un certo punto Barbara propose di organizzare una nuova passeggiata per il giorno seguente, questa volta lungo un percorso più breve che attraversava i prati sopra Bellariva.</p>
+  <p class="battuta">«Domani è il mio ultimo giorno» disse Valeria.</p>
+  <p class="battuta">«Allora dobbiamo approfittarne» rispose Barbara.</p>
+  <p>Valeria sorrise. «Va bene.»</p>
+  <p>Barbara spalancò gli occhi.</p>
+  <p class="battuta">«Hai detto sì senza chiedere quanto dura il percorso?»</p>
+  <p class="battuta">«Ho deciso di fidarmi.»</p>
+  <p>Samuel scoppiò a ridere.</p>
+  <p class="battuta">«Questo sì che è un avvenimento.»</p>
+  <p>Valeria gli lanciò un tovagliolo, proprio come aveva fatto Barbara la sera precedente. Lui lo raccolse e lo sistemò con cura accanto al piatto.</p>
+  <p class="battuta">«Lo conserverò come ricordo.»</p>
+  <p>Barbara rideva così forte da non riuscire a parlare.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>La mattina seguente partirono dopo colazione. Il sentiero attraversava prati verdi punteggiati di fiori gialli e bianchi, poi saliva dolcemente verso una piccola cappella di pietra costruita su un promontorio. Da lì si vedeva il lago, il paese e l'intera valle.</p>
+  <p>Camminarono senza fretta. Barbara raccontava episodi divertenti, Samuel si fermava a fotografare le montagne e Valeria, questa volta, non controllò neppure una volta l'orologio.</p>
+  <p>Quando raggiunsero la cappella, trovarono la porta aperta. All'interno c'erano poche panche di legno, un altare semplice e una finestra rotonda attraverso la quale entrava la luce del mattino. Un piccolo mazzo di fiori freschi era stato sistemato accanto a una statua della Madonna.</p>
+  <p>Samuel si fermò sulla soglia.</p>
+  <p class="battuta">«Vi dispiace se entro un momento?»</p>
+  <p>Barbara scosse la testa. «Vai pure.»</p>
+  <p>Valeria rimase fuori con lei, seduta su un muretto di pietra. Davanti a loro il lago brillava sotto il sole e una brezza leggera muoveva l'erba.</p>
+  <p class="battuta">«Samuel viene qui ogni volta che passa da Bellariva» spiegò Barbara.</p>
+  <p class="battuta">«Per pregare?»</p>
+  <p class="battuta">«Sì. Dice che questo posto lo aiuta a ritrovare la pace.»</p>
+  <p>Valeria guardò la porta della cappella.</p>
+  <p class="battuta">«Ha davvero tanta fede.»</p>
+  <p>Barbara annuì. «Sì. E sai cosa mi piace di lui? Che non pretende che gli altri vedano il mondo come lo vede lui.»</p>
+  <p>Valeria rimase in silenzio.</p>
+  <p class="battuta">«Tu sei credente?» le chiese Barbara.</p>
+  <p class="battuta">«Non lo so. Non ci penso molto.»</p>
+  <p class="battuta">«Va bene anche così.»</p>
+  <p>Valeria sorrise appena. Era la seconda volta, in pochi giorni, che qualcuno accoglieva una sua risposta senza cercare di cambiarla.</p>
+  <p>Samuel uscì poco dopo. Aveva un'espressione serena e si fermò accanto a loro.</p>
+  <p class="battuta">«Pronti per tornare?»</p>
+  <p>Barbara si alzò. «Prima una fotografia.»</p>
+  <p>Sistemò il telefono su una pietra, impostò l'autoscatto e corse verso gli altri due. La prima immagine venne mossa. Nella seconda Samuel aveva gli occhi chiusi. Alla terza, proprio mentre il timer stava per scattare, Barbara inciampò leggermente nell'erba e finì per aggrapparsi al braccio di Valeria.</p>
+  <p>La fotografia li immortalò tutti e tre mentre ridevano.</p>
+  <p>Samuel la guardò sullo schermo e scoppiò in una delle sue risate contagiose.</p>
+  <p class="battuta">«Questa è perfetta.»</p>
+  <p>Barbara annuì. «Sembriamo tre matti.»</p>
+  <p>Valeria osservò l'immagine. Aveva la testa leggermente inclinata, gli occhi socchiusi e un sorriso così aperto che quasi non si riconosceva.</p>
+  <p class="battuta">«Mi piace» disse.</p>
+  <p>Durante la discesa parlarono dei luoghi che avrebbero voluto visitare. Barbara propose un paese sul mare, Samuel una valle famosa per i suoi sentieri panoramici e Valeria raccontò di un piccolo borgo con un giardino botanico che desiderava vedere da anni.</p>
+  <p class="battuta">«Allora andiamo lì» disse Barbara.</p>
+  <p>Valeria la guardò. «Davvero?»</p>
+  <p class="battuta">«Perché no?»</p>
+  <p class="battuta">«È lontano.»</p>
+  <p class="battuta">«Abbiamo le automobili.»</p>
+  <p class="battuta">«Bisogna trovare un albergo.»</p>
+  <p class="battuta">«Lo troviamo.»</p>
+  <p class="battuta">«E organizzare il viaggio.»</p>
+  <p>Samuel sorrise. «Quello lo lasciamo a te.»</p>
+  <p>Valeria rise. «Vi fidate così tanto?»</p>
+  <p>Barbara le prese il braccio.</p>
+  <p class="battuta">«Certo. Tu sai organizzare. Io so improvvisare. Samuel sa trovare il lato bello anche quando qualcosa va storto.»</p>
+  <p class="battuta">«E ridere» aggiunse lui.</p>
+  <p class="battuta">«Soprattutto ridere.»</p>
+  <p>Arrivarono a Bellariva nel primo pomeriggio. Prima di separarsi si fermarono sulla terrazza del chiosco, dove si erano incontrati per la prima volta. Ordinarono tre gelati e si sedettero davanti al lago.</p>
+  <p>Barbara scelse pistacchio e nocciola, Samuel crema e cioccolato, Valeria mirtillo.</p>
+  <p class="battuta">«Dobbiamo creare un gruppo» annunciò Barbara, tirando fuori il telefono.</p>
+  <p>Samuel annuì. «Come lo chiamiamo?»</p>
+  <p>Barbara rifletté per qualche secondo.</p>
+  <p class="battuta">«La compagnia delle cose impreviste.»</p>
+  <p>Valeria sorrise. «Mi piace.»</p>
+  <p>Samuel alzò il bicchiere d'acqua. «Allora brindiamo.»</p>
+  <p class="battuta">«Con l'acqua?» chiese Barbara.</p>
+  <p class="battuta">«È quello che abbiamo.»</p>
+  <p>Barbara rise e sollevò il bicchiere.</p>
+  <p class="battuta">«Alla compagnia delle cose impreviste.»</p>
+  <p class="battuta">«E alle cose belle che ancora non conosciamo» aggiunse Samuel.</p>
+  <p>Valeria li guardò entrambi. Pochi giorni prima avrebbe trovato quella frase troppo sentimentale. Adesso le sembrava semplicemente vera.</p>
+  <p class="battuta">«E agli amici» disse.</p>
+  <p>Barbara le sorrise. Samuel annuì, con gli occhi luminosi.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Quella sera Valeria preparò la valigia. Sistemò i vestiti, ripose il libro nella borsa e controllò l'orario del treno. Poi si sedette sul balcone della sua camera, guardando il lago illuminato dalle ultime luci del tramonto.</p>
+  <p>Il telefono vibrò.</p>
+  <p>Barbara aveva inviato nel gruppo la fotografia scattata davanti alla cappella. Sotto aveva scritto:</p>
+  <p class="messaggio">La nostra prima foto ufficiale. Samuel ride, io rischio di cadere e Valeria finalmente si diverte.</p>
+  <p>Valeria sorrise e rispose:</p>
+  <p class="messaggio">E qualcuno dovrebbe insegnarti a usare l'autoscatto.</p>
+  <p>Samuel aggiunse una lunga serie di faccine sorridenti.</p>
+  <p>Poi arrivò un altro messaggio, questa volta soltanto per lei.</p>
+  <p>Era Samuel.</p>
+  <p class="messaggio">Grazie per questi giorni. Sono contento di averti conosciuta.</p>
+  <p>Valeria rimase a guardare quelle parole. Erano semplici, senza richieste nascoste, senza promesse esagerate. Una persona le stava dicendo che era stata felice di incontrarla.</p>
+  <p>Rispose:</p>
+  <p class="messaggio">Anch'io, Samuel. Davvero.</p>
+  <div class="fregio" aria-hidden="true"><span></span><i></i><span></span></div>
+  <p>Il mattino seguente Barbara e Samuel la accompagnarono alla piccola stazione della valle. Barbara arrivò con un sacchetto di biscotti alle nocciole, Samuel con una fotografia stampata: quella scattata davanti alla cappella, in cui ridevano tutti e tre.</p>
+  <p>Sul retro aveva scritto soltanto la data e il nome del luogo.</p>
+  <p>Valeria la prese con cura.</p>
+  <p class="battuta">«Grazie.»</p>
+  <p>Barbara la abbracciò senza preavviso. Valeria rimase rigida per un istante, poi ricambiò l'abbraccio.</p>
+  <p>Samuel le porse la mano, ma Valeria lo sorprese avvicinandosi per abbracciare anche lui.</p>
+  <p class="battuta">«Ci vediamo presto» disse.</p>
+  <p class="battuta">«Ne sono sicuro» rispose Samuel.</p>
+  <p>Quando il treno arrivò, Valeria salì e trovò un posto accanto al finestrino. Sistemò la borsa, appoggiò la fotografia sulle ginocchia e guardò Barbara e Samuel che la salutavano dal marciapiede.</p>
+  <p>Barbara agitava entrambe le braccia. Samuel rideva, probabilmente per qualcosa che lei aveva appena detto.</p>
+  <p>Valeria ricambiò il saluto.</p>
+  <p>Mentre il treno si allontanava, osservò la fotografia. Tre persone molto diverse, incontratesi quasi per caso, ridevano insieme davanti a un lago circondato dalle montagne.</p>
+  <p>Ripensò alla prima mattina, quando aveva scelto il tavolo più lontano da Samuel perché la sua allegria le sembrava sospetta. Ripensò a Barbara che aveva difeso un ragazzo sconosciuto, alla passeggiata con la coppia di anziani, ai messaggi ricevuti mentre era rimasta sola alla locanda.</p>
+  <p>Non era successo nulla di straordinario. Nessuno le aveva chiesto di raccontare il proprio passato, nessuno aveva cercato di convincerla a cambiare carattere. Barbara e Samuel le avevano semplicemente fatto spazio, lasciandole la libertà di avvicinarsi quando se la fosse sentita.</p>
+  <p>E lei, alla fine, lo aveva fatto.</p>
+  <p>Prese il telefono e aprì il gruppo.</p>
+  <p class="messaggio">Ho già controllato il calendario. Il prossimo mese ho un fine settimana libero. Se vi va, possiamo organizzare il viaggio al giardino botanico.</p>
+  <p>Barbara rispose quasi subito.</p>
+  <p class="messaggio">Finalmente! Io porto i biscotti.</p>
+  <p>Samuel aggiunse:</p>
+  <p class="messaggio">Io porto la macchina fotografica. E questa volta cercherò di non chiudere gli occhi.</p>
+  <p>Valeria rise da sola, attirando lo sguardo divertito di una signora seduta poco distante.</p>
+  <p>Poi scrisse:</p>
+  <p class="messaggio">E io porto la mappa. Ma prometto che, se troviamo una strada più bella, possiamo anche cambiare percorso.</p>
+  <p>Ripose il telefono e tornò a guardare il paesaggio. Le montagne lasciavano lentamente spazio alle colline, ai vigneti e ai piccoli paesi attraversati dalla ferrovia.</p>
+  <p>Adesso aveva due persone da chiamare, un viaggio da organizzare e una fotografia da mettere in cornice.</p>
+  <p>Guardò un'ultima volta la fotografia. Barbara rideva con gli occhi chiusi, Samuel aveva un'espressione felice e lei stessa sembrava sorpresa dalla propria allegria.</p>
+  <p>Poi la ripose nel libro, vicino alla prima pagina, e si sistemò comodamente sul sedile.</p>
+  </article>
+
+  <div class="fine">
+    <p>Grazie di essere rimasto fino in fondo.</p>
+    <p><a href="metti-in-pausa-il-mondo.html">Torna a «Metti in pausa il mondo» →</a></p>
+  </div>
+</main>
+
+<footer>
+  <p>«Una caramella alla menta» è un marchio depositato. Testi di Paola Paika Sebastio.</p>
+  <p class="riga-privacy"><a href="privacy.html">Informativa privacy</a></p>
+</footer>
+</body>
+</html>

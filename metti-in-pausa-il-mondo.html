@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Metti in pausa il mondo — Una caramella alla menta</title>
+<meta name="description" content="Tre modi per staccare dieci minuti: ascoltare qualcosa, leggere una storia, fare qualcosa di piacevole.">
+<link rel="icon" href="logo.png">
+<style>
+/* Caratteri serviti dal sito stesso: nessuna richiesta a server di terzi. */
+@font-face{font-family:'Caladea';src:url('font/Caladea-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Caladea';src:url('font/Caladea-Italic.woff') format('woff');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Carlito';src:url('font/Carlito-Bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+
+/* Il corsivo dei titoli: Instrument Serif, di Rodrigo Fuenzalida e Jordan
+   Egstad, licenza SIL Open Font (font/LICENZE.txt), servito dal sito come
+   gli altri.
+   Scelto misurando i rapporti fra le altezze delle lettere sulla copertina
+   a stampa a 300 dpi. Quei rapporti sono l'impronta di un carattere: non
+   cambiano col corpo ne' con la spaziatura.
+
+                       minuscole/maiuscole   aste/maiuscole
+     copertina                0,692               1,005
+     Instrument Serif         0,710               1,021
+     Cormorant Garamond       0,626               1,139
+
+   Su 92 combinazioni di carattere e peso, Instrument Serif sbaglia 0,055;
+   il secondo arrivato 0,097.
+
+   Qui prima c'era Cormorant Garamond, scelto confrontando larghezza e
+   spessore della parola «Caramella». Era una misura falsata: normalizzavo
+   sull'altezza del riquadro, che dipende dalle aste, e Cormorant ha le aste
+   molto piu' alte delle maiuscole. Cosi' premiavo proprio il carattere piu'
+   lontano. Il rapporto fra le altezze non si puo' falsare allo stesso modo. */
+@font-face{font-family:'Instrument Serif';src:url('font/InstrumentSerif-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --panna:#F7F3EA; --panna-alt:#EDE6D8; --salvia:#7E8E6F; --menta:#C4DCC8;
+  --oliva:#3E5222; --inchiostro:#23201A; --grigio:#6E6859; --bordo:#D8CEB9;
+  --font-testo:'Caladea',Georgia,'Times New Roman',serif;
+  --font-etichetta:'Carlito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-titolo:'Instrument Serif','Caladea',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --panna:#15140F; --panna-alt:#1F1D16; --salvia:#9DB08C; --menta:#2D3B2F;
+  --oliva:#A6BE78; --inchiostro:#F0EADB; --grigio:#9E9785; --bordo:#36332A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--panna);color:var(--inchiostro);
+  font-family:var(--font-testo);font-size:1.19rem;line-height:1.68}
+img{max-width:100%}
+a{color:var(--oliva)}
+
+/* ---- testata ----
+   Il testo sta a sinistra, non al centro: la zona calma e chiara di questa
+   immagine e' li' (muretto e cielo). Misurato sull'immagine prima di decidere. */
+.testata{--oliva:#3E5222;--inchiostro:#23201A;--grigio:#6E6859} /* testata sempre su velo chiaro: colori del tema chiaro anche in tema scuro */
+.testata{position:relative;width:100%;overflow:hidden;height:clamp(430px,42vw,620px)}
+.testata img{display:block;width:100%;height:100%;object-fit:cover;object-position:34% 48%}
+.testata::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 46% 64% at 26% 46%,
+    rgba(247,243,234,.86) 0%, rgba(247,243,234,.76) 36%,
+    rgba(247,243,234,.40) 66%, rgba(247,243,234,0) 100%);
+}
+.sopra{position:absolute;inset:0;z-index:2;display:flex;align-items:center;
+  justify-content:flex-start;
+  padding-left:max(7%,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));}
+.blocco{max-width:27rem;display:flex;flex-direction:column;align-items:flex-start;
+  gap:1.05rem;text-align:left}
+.nome{font-family:var(--font-titolo);font-style:italic;font-weight:400;font-size:clamp(2.2rem,4.3vw,3.4rem);line-height:1.04;letter-spacing:.005em;color:var(--oliva);
+  margin:0;text-wrap:balance}
+.intro{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--inchiostro);margin:0}
+
+/* Larghezze intermedie: la zona calma dell'immagine e' solo il 40% sinistro,
+   quindi il blocco va stretto o le righe finiscono sull'ulivo. Misurato: a
+   820 px l'introduzione scendeva a 1,8 di contrasto sul bordo destro. */
+@media (min-width:701px) and (max-width:1100px){
+  .blocco{max-width:22rem}
+  .nome{font-size:clamp(2.05rem,3.8vw,2.65rem)}
+  .intro{font-size:1.02rem;line-height:1.6}
+}
+
+@media (max-width:700px){
+  /* height:auto e' indispensabile, se no l'altezza vince su aspect-ratio */
+  .testata{height:clamp(420px,112vw,520px)}
+  .testata img{object-position:26% 48%}
+  .testata::after{
+    background:linear-gradient(to bottom,rgba(247,243,234,.88) 0%,
+      rgba(247,243,234,.78) 46%,rgba(247,243,234,.30) 78%,rgba(247,243,234,0) 100%);
+  }
+  .sopra{align-items:flex-start;padding-top:8%;padding-left:max(18px,env(safe-area-inset-left,0px))}
+  .blocco{max-width:19.5rem;gap:.85rem}
+  .nome{font-size:2.25rem}
+  .intro{font-size:1.04rem;line-height:1.6}
+  /* Sul telefono i riquadri uno sotto l'altro diventano una colonna lunga:
+     stretti i margini interni e lo spazio fra loro, senza toccare il corpo
+     del testo, che deve restare leggibile. */
+  .ingressi{margin-top:2.2rem;gap:.8rem}
+  .ingresso{padding:1.15rem 1.2rem 1.25rem;gap:.42rem}
+  .ingresso h2{font-size:1.24rem}
+  .ingresso p{font-size:1.01rem;line-height:1.5}
+  .coda{margin-top:2.4rem}
+}
+
+/* ---- corpo ---- */
+main{max-width:52rem;margin:0 auto;
+  padding-inline:max(18px,env(safe-area-inset-left,0px))}
+
+.torna{font-family:var(--font-etichetta);font-size:.92rem;padding-block:1.5rem .2rem;
+  display:block;color:var(--grigio);text-decoration:none}
+.torna:hover{color:var(--oliva)}
+
+.ingressi{list-style:none;margin:2.8rem 0 0;padding:0;display:grid;gap:1.1rem;
+  grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.ingresso{background:var(--panna-alt);border:1px solid var(--bordo);border-radius:12px;
+  padding:1.5rem 1.4rem 1.6rem;display:flex;flex-direction:column;gap:.6rem}
+.ingresso .etichetta{font-family:var(--font-etichetta);font-size:.74rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--salvia);font-weight:700}
+.ingresso h2{font-family:var(--font-testo);font-size:1.34rem;line-height:1.28;margin:0;
+  font-weight:700;color:var(--oliva);text-wrap:balance}
+.ingresso p{margin:0;font-size:1.04rem;line-height:1.58;color:var(--inchiostro)}
+.ingresso h2 a{color:inherit;text-decoration:none}
+.ingresso h2 a:hover{text-decoration:underline;text-underline-offset:3px}
+.ingresso .vai{margin-top:.35rem}
+.ingresso .vai a{font-family:var(--font-etichetta);font-weight:700;font-size:1rem;color:var(--oliva)}
+/* Finche' l'ingresso e' uno solo non deve spalmarsi su tutta la riga:
+   quando torneranno gli altri due questa regola si spegne da sola. */
+.ingressi:has(> li:only-child){max-width:34rem}
+
+.coda{margin-block:3.2rem 0;max-width:34rem}
+.coda p{margin:0;font-size:1.08rem;line-height:1.65;color:var(--grigio);font-style:italic}
+
+footer{max-width:52rem;margin:3.5rem auto 0;border-top:1px solid var(--bordo);
+  padding:2.2rem max(18px,env(safe-area-inset-left,0px)) 3.5rem;
+  display:flex;flex-direction:column;gap:.9rem}
+footer p{font-family:var(--font-etichetta);font-size:.86rem;line-height:1.55;color:var(--grigio);margin:0}
+a:focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+
+/* ---------- schermi grandi ----------
+   Il contenitore si allarga: le porte sono schede, non paragrafi, e da
+   larghe si vedono per quello che sono. */
+@media (min-width:1100px){
+  main{max-width:62rem}
+  footer{max-width:62rem}
+  .ingressi{gap:1.4rem}
+  .coda{max-width:35rem}
+}
+
+.riga-privacy{font-family:var(--font-etichetta);font-size:.88rem;margin-top:.9rem}
+.riga-privacy a{color:var(--salvia)}
+
+/* ---------- schermo grande: la scala ----------
+   La struttura di questa pagina gia' usa la larghezza. Quello che restava
+   da telefono era il corpo del testo: 19 px su uno schermo guardato da
+   sessanta centimetri sono piccoli. Cresce solo il testo che si legge —
+   non i titoli, che hanno gia' la loro scala, e non la testata, che e'
+   misurata sull'illustrazione. */
+@media (min-width:1100px){
+  body{font-size:1.32rem}
+  .occhiello,.sommario,.cosa{font-size:1.08rem}
+}
+</style>
+</head>
+<body>
+
+<header class="testata">
+  <img src="pausa.jpg" alt="">
+  <div class="sopra">
+    <div class="blocco">
+      <h1 class="nome">Metti in pausa il mondo</h1>
+      <p class="intro">Qui dentro non c'è niente da risolvere. Nessun esercizio da fare bene, nessun progresso da misurare. Tre piccoli modi per concederti una pausa, per tutto il tempo che vuoi — tanto il mondo, nel frattempo, se la cava benissimo senza di te.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="torna" href="./">← Una caramella alla menta</a>
+
+  <ul class="ingressi">
+    <li class="ingresso">
+      <p class="etichetta">Un barattolo</p>
+      <h2><a href="fai-qualcosa-di-piacevole.html">Fai qualcosa di piacevole</a></h2>
+      <p>Piccole proposte da pescare una alla volta: a volte un invito a giocare, a volte una curiosità, a volte solo una frase. Niente da completare.</p>
+      <p class="vai"><a href="fai-qualcosa-di-piacevole.html">Apri il barattolo →</a></p>
+    </li>
+
+    <li class="ingresso">
+      <p class="etichetta">Un racconto</p>
+      <h2><a href="leggi-una-storia.html">Leggi una storia</a></h2>
+      <p>Racconti in cui non succede niente di grave: un paese di mare, un giardino di dalie. Accanto a ciascuno c'è quanto dura, così scegli in base al tempo che hai. Se ne lasci uno a metà, resta lì.</p>
+      <p class="vai"><a href="leggi-una-storia.html">Vai a leggere →</a></p>
+    </li>
+
+    <!-- «Ascolta qualcosa» resta spento finche' non ha contenuti veri dietro:
+         un riquadro che non porta da nessuna parte, su questo sito, e' peggio
+         di un riquadro in meno. Per riaccenderlo basta togliere il commento e
+         aggiungere la pagina corrispondente.
+
+    <li class="ingresso">
+      <p class="etichetta">Nelle orecchie</p>
+      <h2><a href="ascolta-qualcosa.html">Ascolta qualcosa</a></h2>
+      <p>Voci, respiri, silenzi messi in fila. Da infilare nelle orecchie quando la testa fa troppo rumore per leggere.</p>
+      <p class="vai"><a href="ascolta-qualcosa.html">Vai ad ascoltare →</a></p>
+    </li>
+    -->
+  </ul>
+
+  <div class="coda">
+    <p>Se oggi non hai voglia di nessuna delle tre, va bene uguale. Anche non fare niente è un modo di mettere in pausa.</p>
+  </div>
+</main>
+
+<footer>
+  <p>«Una caramella alla menta» è un marchio depositato. Testi di Paola Paika Sebastio.</p>
+  <p class="riga-privacy"><a href="privacy.html">Informativa privacy</a></p>
+</footer>
+</body>
+</html>
